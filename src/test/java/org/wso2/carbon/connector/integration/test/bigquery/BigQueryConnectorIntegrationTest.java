@@ -17,18 +17,17 @@
  */
 package org.wso2.carbon.connector.integration.test.bigquery;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.connector.integration.test.base.ConnectorIntegrationTestBase;
 import org.wso2.connector.integration.test.base.RestResponse;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBase {
 
@@ -44,7 +43,7 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init("bigquery-connector-1.0.0");
+        init("bigquery-connector-1.0.1-SNAPSHOT");
 
         esbRequestHeadersMap.put("Accept-Charset", "UTF-8");
         esbRequestHeadersMap.put("Content-Type", "application/json");
