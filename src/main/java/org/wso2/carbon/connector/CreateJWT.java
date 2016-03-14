@@ -65,7 +65,7 @@ public class CreateJWT extends AbstractConnector {
      *
      * @param data the byte array of data to generate the signature
      * @param privateKey the private key to sign the byte array
-     * @return
+     * @return the signed signature
      * @throws InvalidKeyException
      * @throws SignatureException
      * @throws NoSuchAlgorithmException
@@ -84,7 +84,7 @@ public class CreateJWT extends AbstractConnector {
      *
      * @param keyFile the p12 file to extract the private key
      * @param password the password to extract the p12 file
-     * @return
+     * @return the private key
      * @throws KeyStoreException
      * @throws IOException
      * @throws NoSuchAlgorithmException
@@ -97,14 +97,13 @@ public class CreateJWT extends AbstractConnector {
 
         KeyStore keystore = KeyStore.getInstance(JWTConstant.KEY_STORE);
         keystore.load(new FileInputStream(keyFile), password.toCharArray());
-        PrivateKey privateKey = (PrivateKey) keystore.getKey(keyAlias, password.toCharArray());
-        return privateKey;
+        return (PrivateKey) keystore.getKey(keyAlias, password.toCharArray());
     }
 
     /**
      * The method is using to construct the Json Web Token
      * @param messageContext the message context
-     * @return
+     * @return the json web token
      * @throws InvalidKeyException
      * @throws SignatureException
      * @throws NoSuchAlgorithmException
