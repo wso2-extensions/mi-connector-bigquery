@@ -22,5 +22,9 @@
             <file>listTabledata.xml</file>
             <description>List available tabledata.</description>
         </component>
+        <component name="insertAllTableData">
+            <file>insertAllTableData.xml</file>
+            <description>Insert tabledata into a table.</description>
+        </component>
     </subComponents>
 </component>

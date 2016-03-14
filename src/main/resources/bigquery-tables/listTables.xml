@@ -62,7 +62,8 @@
         <filter xpath="get-property('uri.var.statusCode') = 401 and get-property('uri.var.refreshTokenNegotiated') = 'false'">
             <then>
                 <bigquery.getAccessTokenFromRefreshToken/>
-                <header name="Authorization" expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
+                <header name="Authorization"
+                        expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
                         scope="transport"/>
                 <bigquery.listTables/>
             </then>

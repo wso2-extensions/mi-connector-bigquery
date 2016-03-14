@@ -26,7 +26,8 @@
                description="The maximum number of rows of data to return per page of results. Responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies."/>
     <parameter name="defaultDatasetId"
                description="A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters. "/>
-    <parameter name="defaultProjectId" description="The ID of the project containing this dataset."/>
+    <parameter name="defaultProjectId"
+               description="The ID of the project containing this dataset."/>
     <parameter name="timeoutMs"
                description="How long to wait for the query to complete, in milliseconds, before the request times out and returns. "/>
     <parameter name="dryRun"
@@ -113,7 +114,8 @@
         <filter xpath="get-property('uri.var.statusCode') = 401 and get-property('uri.var.refreshTokenNegotiated') = 'false'">
             <then>
                 <bigquery.getAccessTokenFromRefreshToken/>
-                <header name="Authorization" expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
+                <header name="Authorization"
+                        expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
                         scope="transport"/>
                 <bigquery.runQuery/>
             </then>

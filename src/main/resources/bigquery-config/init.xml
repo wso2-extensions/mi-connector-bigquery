@@ -20,7 +20,8 @@
 <template name="init" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="apiUrl" description="Base endpoint URL of BigQuery API."/>
     <parameter name="accessToken" description="OAuth Token for BigQuery API."/>
-    <parameter name="apiKey" description="API key. Required unless you provide an OAuth 2.0 token."/>
+    <parameter name="apiKey"
+               description="API key. Required unless you provide an OAuth 2.0 token."/>
     <parameter name="callback"
                description="Name of the JavaScript callback function that handles the response. Used in JavaScript JSON-P requests."/>
     <parameter name="prettyPrint"
@@ -50,7 +51,8 @@
         <property name="uri.var.refreshTokenNegotiated" value="false"/>
         <filter source="boolean(get-property('uri.var.apiUrl'))" regex="false">
             <then>
-                <property name="uri.var.apiUrl" expression="get-property('registry', 'connectors/BigQuery/apiUrl')"/>
+                <property name="uri.var.apiUrl"
+                          expression="get-property('registry', 'connectors/BigQuery/apiUrl')"/>
             </then>
         </filter>
         <!-- If the API key is sent with the request, then proceed with key query parameter.Else process with OAuth flow. -->
@@ -75,7 +77,8 @@
                         </filter>
                     </then>
                 </filter>
-                <header name="Authorization" expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
+                <header name="Authorization"
+                        expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
                         scope="transport"/>
             </else>
         </filter>
@@ -83,14 +86,16 @@
             <then>
                 <property name="uri.var.ifNoneMatch"
                           expression="fn:concat('&quot;',get-property('uri.var.ifNoneMatch'),'&quot;')"/>
-                <header name="If-None-Match" expression="get-property('uri.var.ifNoneMatch')" scope="transport"/>
+                <header name="If-None-Match" expression="get-property('uri.var.ifNoneMatch')"
+                        scope="transport"/>
             </then>
         </filter>
         <filter source="boolean(get-property('uri.var.ifMatch'))" regex="true">
             <then>
                 <property name="uri.var.ifMatch"
                           expression="fn:concat('&quot;',get-property('uri.var.ifMatch'),'&quot;')"/>
-                <header name="If-Match" expression="get-property('uri.var.ifMatch')" scope="transport"/>
+                <header name="If-Match" expression="get-property('uri.var.ifMatch')"
+                        scope="transport"/>
             </then>
         </filter>
         <script language="js">

@@ -18,7 +18,8 @@
 -->
 <!-- Method Documentation URL: https://cloud.google.com/bigquery/docs/reference/v2/datasets/get -->
 <template name="getDataset" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="projectId" description="The Id of the project which the dataset is belongs to."/>
+    <parameter name="projectId"
+               description="The Id of the project which the dataset is belongs to."/>
     <parameter name="datasetId" description="The Id of the dataset."/>
     <sequence>
         <property name="uri.var.projectId" expression="$func:projectId"/>
@@ -39,7 +40,8 @@
         <filter xpath="get-property('uri.var.statusCode') = 401 and get-property('uri.var.refreshTokenNegotiated') = 'false'">
             <then>
                 <bigquery.getAccessTokenFromRefreshToken/>
-                <header name="Authorization" expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
+                <header name="Authorization"
+                        expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
                         scope="transport"/>
                 <bigquery.getDataset/>
             </then>
