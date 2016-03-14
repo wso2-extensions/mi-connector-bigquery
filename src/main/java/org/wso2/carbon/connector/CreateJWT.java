@@ -40,14 +40,18 @@ import java.security.SignatureException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
+/**
+ * Create Json Web Token to get the accessToken for
+ * BigQuery Connector using serviceAccount authentication.
+ */
 public class CreateJWT extends AbstractConnector {
     private static final Log log = LogFactory.getLog(CreateJWT.class);
-    public static String keyAlias = BigQueryConstant.keyAlias;
+    public static String keyAlias = JWTConstant.KEYALIAS;
 
     public void connect(MessageContext messageContext) {
         try {
             String token = getJsonWebToken(messageContext);
-            messageContext.setProperty(BigQueryConstant.JWT_PROP, token);
+            messageContext.setProperty(JWTConstant.JWT_PROP, token);
 
         } catch (IOException | InvalidKeyException | SignatureException |
                 NoSuchAlgorithmException | UnrecoverableKeyException | CertificateException |
@@ -56,44 +60,79 @@ public class CreateJWT extends AbstractConnector {
         }
     }
 
+    /**
+     * The method to sign the byte array of data using the private key.
+     *
+     * @param data the byte array of data to generate the signature
+     * @param privateKey the private key to sign the byte array
+     * @return
+     * @throws InvalidKeyException
+     * @throws SignatureException
+     * @throws NoSuchAlgorithmException
+     */
     public static byte[] signData(byte[] data, PrivateKey privateKey) throws InvalidKeyException,
             SignatureException, NoSuchAlgorithmException {
 
-        Signature signature = Signature.getInstance(BigQueryConstant.signature);
+        Signature signature = Signature.getInstance(JWTConstant.SIGNATURE);
         signature.initSign(privateKey);
         signature.update(data);
         return signature.sign();
     }
 
+    /**
+     * The method is using to extract the private key from the p12 file
+     *
+     * @param keyFile the p12 file to extract the private key
+     * @param password the password to extract the p12 file
+     * @return
+     * @throws KeyStoreException
+     * @throws IOException
+     * @throws NoSuchAlgorithmException
+     * @throws CertificateException
+     * @throws UnrecoverableKeyException
+     */
     private static PrivateKey getPrivateKey(String keyFile, String password)
             throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException,
             UnrecoverableKeyException {
 
-        KeyStore keystore = KeyStore.getInstance(BigQueryConstant.keyStore);
+        KeyStore keystore = KeyStore.getInstance(JWTConstant.KEY_STORE);
         keystore.load(new FileInputStream(keyFile), password.toCharArray());
         PrivateKey privateKey = (PrivateKey) keystore.getKey(keyAlias, password.toCharArray());
         return privateKey;
     }
 
+    /**
+     * The method is using to construct the Json Web Token
+     * @param messageContext the message context
+     * @return
+     * @throws InvalidKeyException
+     * @throws SignatureException
+     * @throws NoSuchAlgorithmException
+     * @throws UnrecoverableKeyException
+     * @throws KeyStoreException
+     * @throws CertificateException
+     * @throws IOException
+     */
     private static String getJsonWebToken(MessageContext messageContext) throws
             InvalidKeyException, SignatureException, NoSuchAlgorithmException,
             UnrecoverableKeyException, KeyStoreException, CertificateException, IOException {
 
         String keyStoreLocation = (String) ConnectorUtils.lookupTemplateParamater(messageContext,
-                BigQueryConstant.keyStoreLocation);
+                JWTConstant.KEY_STORE_LOCATION);
         String serviceAccount = (String) ConnectorUtils.lookupTemplateParamater(messageContext,
-                BigQueryConstant.serviceAccount);
+                JWTConstant.SERVICE_ACCOUNT);
         String scope = (String) ConnectorUtils.lookupTemplateParamater(messageContext,
-                BigQueryConstant.scope);
-        String password = BigQueryConstant.password;
+                JWTConstant.SCOPE);
+        String password = JWTConstant.PASSWORD;
         String jwtHeaderStr;
         String jwtClaimStr;
         PrivateKey privateKey;
 
+        //Construct JWT Header
         JSONObject jwtHeader = new JSONObject();
         try {
-            jwtHeader.put(BigQueryConstant.JWT_HEADER_ALGO, BigQueryConstant.JWT_HEADER_ALGO_VALUE);
-            jwtHeader.put(BigQueryConstant.JWT_HEADER_TYPE, BigQueryConstant.JWT_HEADER_TYPE_VALUE);
+            jwtHeader.put(JWTConstant.JWT_HEADER_ALGO, JWTConstant.JWT_HEADER_ALGO_VALUE);
+            jwtHeader.put(JWTConstant.JWT_HEADER_TYPE, JWTConstant.JWT_HEADER_TYPE_VALUE);
             jwtHeaderStr = jwtHeader.toString();
         } catch (JSONException e) {
             throw new SynapseException(e.getMessage(), e);
@@ -101,18 +140,19 @@ public class CreateJWT extends AbstractConnector {
 
         byte[] encodedHeader = new byte[0];
         if (jwtHeaderStr != null) {
-            encodedHeader = Base64.encodeBase64(jwtHeaderStr.getBytes(BigQueryConstant.utf));
+            encodedHeader = Base64.encodeBase64(jwtHeaderStr.getBytes(JWTConstant.UTF));
         }
 
+        //Construct JWT Claim
         JSONObject jwtClaimSet = new JSONObject();
         long iat = (System.currentTimeMillis() / 1000) - 60;
         long exp = iat + 3600;
         try {
-            jwtClaimSet.put(BigQueryConstant.JWT_CLAIMSET_ISS, serviceAccount);
-            jwtClaimSet.put(BigQueryConstant.scope, scope);
-            jwtClaimSet.put(BigQueryConstant.JWT_CLAIMSET_AUD, BigQueryConstant.tokenEndpoint);
-            jwtClaimSet.put(BigQueryConstant.JWT_CLAIMSET_EXP, +exp);
-            jwtClaimSet.put(BigQueryConstant.JWT_CLAIMSET_IAT, +iat);
+            jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_ISS, serviceAccount);
+            jwtClaimSet.put(JWTConstant.SCOPE, scope);
+            jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_AUD, JWTConstant.TOKEN_ENDPOINT);
+            jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_EXP, +exp);
+            jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_IAT, +iat);
             jwtClaimStr = jwtClaimSet.toString();
         } catch (JSONException e) {
             throw new SynapseException(e.getMessage(), e);
@@ -120,7 +160,7 @@ public class CreateJWT extends AbstractConnector {
 
         byte[] encodedClaimSet = new byte[0];
         if (jwtClaimStr != null) {
-            encodedClaimSet = Base64.encodeBase64(jwtClaimStr.getBytes(BigQueryConstant.utf));
+            encodedClaimSet = Base64.encodeBase64(jwtClaimStr.getBytes(JWTConstant.UTF));
         }
 
         StringBuilder token = new StringBuilder();
@@ -128,8 +168,9 @@ public class CreateJWT extends AbstractConnector {
         token.append(".");
         token.append(new String(encodedClaimSet));
         try {
+            //Create JWT SIGNATURE
             privateKey = getPrivateKey(keyStoreLocation, password);
-            byte[] sig = signData(token.toString().getBytes(BigQueryConstant.utf), privateKey);
+            byte[] sig = signData(token.toString().getBytes(JWTConstant.UTF), privateKey);
             byte[] encodedSig = Base64.encodeBase64(sig);
             token.append(".");
             token.append(new String(encodedSig));

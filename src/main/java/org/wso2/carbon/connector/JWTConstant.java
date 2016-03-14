@@ -18,15 +18,18 @@ package org.wso2.carbon.connector;
  * under the License.
  */
 
-public class BigQueryConstant {
+/**
+ *The constants for BigQuery
+ */
+public class JWTConstant {
 
-    public static final String keyAlias = "privatekey";
-    public static final String signature = "SHA256withRSA";
-    public static final String keyStore = "PKCS12";
-    public static final String keyStoreLocation = "keyStoreLocation";
-    public static final String serviceAccount = "serviceAccount";
-    public static final String scope = "scope";
-    public static final String password = "notasecret";
+    public static final String KEYALIAS = "privatekey";
+    public static final String SIGNATURE = "SHA256withRSA";
+    public static final String KEY_STORE = "PKCS12";
+    public static final String KEY_STORE_LOCATION = "keyStoreLocation";
+    public static final String SERVICE_ACCOUNT = "serviceAccount";
+    public static final String SCOPE = "scope";
+    public static final String PASSWORD = "notasecret";
     public static final String JWT_HEADER_ALGO = "alg";
     public static final String JWT_HEADER_ALGO_VALUE = "RS256";
     public static final String JWT_HEADER_TYPE = "typ";
@@ -36,7 +39,7 @@ public class BigQueryConstant {
     public static final String JWT_CLAIMSET_EXP = "exp";
     public static final String JWT_CLAIMSET_IAT = "iat";
 
-    public static final String utf = "UTF-8";
-    public static final String tokenEndpoint = "https://www.googleapis.com/oauth2/v4/token";
+    public static final String UTF = "UTF-8";
+    public static final String TOKEN_ENDPOINT = "https://www.googleapis.com/oauth2/v4/token";
     public static final String JWT_PROP = "uri.var.jwt";
 }
