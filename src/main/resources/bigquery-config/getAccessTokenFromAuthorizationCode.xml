@@ -19,8 +19,10 @@
 <!-- Method Documentation URL: https://developers.google.com/identity/protocols/OAuth2WebServer -->
 <template name="getAccessTokenFromAuthorizationCode" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="apiUrl" description="Base endpoint URL of BigQuery API."/>
-    <parameter name="authorizationCode" description="Authorization code to be used to obtain the access token."/>
-    <parameter name="redirectUrl" description="Authorization code to be used to obtain the access token."/>
+    <parameter name="authorizationCode"
+               description="Authorization code to be used to obtain the access token."/>
+    <parameter name="redirectUrl"
+               description="Authorization code to be used to obtain the access token."/>
     <sequence>
         <property name="uri.var.apiUrl" expression="$func:apiUrl"/>
         <property name="uri.var.authorizationCode" expression="$func:authorizationCode"/>
@@ -28,7 +30,8 @@
         <!-- If the user sends the apiUrl it will be used, else it'll be fetched from the registry. -->
         <filter source="boolean(get-property('uri.var.apiUrl'))" regex="false">
             <then>
-                <property name="uri.var.apiUrl" expression="get-property('registry', 'connectors/BigQuery/apiUrl')"/>
+                <property name="uri.var.apiUrl"
+                          expression="get-property('registry', 'connectors/BigQuery/apiUrl')"/>
             </then>
         </filter>
         <!-- If the user sends the redirectUrl it will be used, else it'll be fetched from the registry. -->
@@ -38,7 +41,8 @@
                           expression="get-property('registry', 'connectors/BigQuery/redirectUrl')"/>
             </then>
         </filter>
-        <property name="uri.var.clientId" expression="get-property('registry', 'connectors/BigQuery/clientId')"/>
+        <property name="uri.var.clientId"
+                  expression="get-property('registry', 'connectors/BigQuery/clientId')"/>
         <property name="uri.var.clientSecret"
                   expression="get-property('registry', 'connectors/BigQuery/clientSecret')"/>
         <!-- Type of the grant used to get a new access token by negotiating the refresh token. -->

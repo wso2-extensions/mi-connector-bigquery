@@ -27,7 +27,8 @@
         </filter>
         <property name="uri.var.refreshToken"
                   expression="get-property('registry', 'connectors/BigQuery/refreshToken')"/>
-        <property name="uri.var.clientId" expression="get-property('registry', 'connectors/BigQuery/clientId')"/>
+        <property name="uri.var.clientId"
+                  expression="get-property('registry', 'connectors/BigQuery/clientId')"/>
         <property name="uri.var.clientSecret"
                   expression="get-property('registry', 'connectors/BigQuery/clientSecret')"/>
         <!-- Type of the grant used to get a new access token by negotiating the refresh token. -->
