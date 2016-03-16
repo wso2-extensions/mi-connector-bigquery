@@ -75,7 +75,7 @@
         </script>
         <call>
             <endpoint>
-                <http method="get"
+                <http method="Post"
                       uri-template="{+uri.var.apiUrl}/bigquery/v2/projects/{+uri.var.projectId}/datasets/{+uri.var.datasetId}/tables/{+uri.var.tableId}/insertAll"/>
             </endpoint>
         </call>
