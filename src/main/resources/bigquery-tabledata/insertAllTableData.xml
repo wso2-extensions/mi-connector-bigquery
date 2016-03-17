@@ -26,6 +26,7 @@
                description="Boolean value to check whether the validation of row"/>
     <parameter name="ignoreUnknownValues"
                description="Boolean value to check the validation of the values that match the table schema"/>
+    <parameter name="templateSuffix" description="Instance table"/>
     <parameter name="jsonPay" description="A JSON object that contains a row of data"/>
     <sequence>
         <property name="uri.var.datasetId" expression="$func:datasetId"/>
@@ -33,6 +34,7 @@
         <property name="uri.var.tableId" expression="$func:tableId"/>
         <property name="uri.var.skipInvalidRows" expression="$func:skipInvalidRows"/>
         <property name="uri.var.ignoreUnknownValues" expression="$func:ignoreUnknownValues"/>
+        <property name="uri.var.templateSuffix" expression="$func:templateSuffix"/>
         <property name="uri.var.jsonPay" expression="$func:jsonPay"/>
         <payloadFactory media-type="json">
             <format>
@@ -40,14 +42,16 @@
                 "kind": "bigquery#tableDataInsertAllRequest",
                 "skipInvalidRows": "$1",
                 "ignoreUnknownValues": "$2",
+                "templateSuffix": "$3",
                 "rows": [
-                $3
+                $4
                 ]
                 }
             </format>
             <args>
                 <arg expression="get-property('uri.var.skipInvalidRows')"/>
                 <arg expression="get-property('uri.var.ignoreUnknownValues')"/>
+                <arg expression="get-property('uri.var.templateSuffix')"/>
                 <arg expression="get-property('uri.var.jsonPay')"/>
             </args>
         </payloadFactory>
@@ -56,18 +60,22 @@
             var payload = mc.getPayloadJSON();
             var skipInvalidRows = mc.getProperty("uri.var.skipInvalidRows");
             var ignoreUnknownValues = mc.getProperty("uri.var.ignoreUnknownValues");
+            var templateSuffix = mc.getProperty("uri.var.templateSuffix");
             if(skipInvalidRows != null && skipInvalidRows != ""){
                 payload.skipInvalidRows = skipInvalidRows;
             }
             if(ignoreUnknownValues != null && ignoreUnknownValues != ""){
                 payload.ignoreUnknownValues = ignoreUnknownValues;
             }
+              if(templateSuffix != null && templateSuffix != ""){
+                payload.templateSuffix = templateSuffix;
+            }
             mc.setPayloadJSON(payload);
             ]]>
         </script>
         <call>
             <endpoint>
-                <http method="get"
+                <http method="Post"
                       uri-template="{+uri.var.apiUrl}/bigquery/v2/projects/{+uri.var.projectId}/datasets/{+uri.var.datasetId}/tables/{+uri.var.tableId}/insertAll"/>
             </endpoint>
         </call>
