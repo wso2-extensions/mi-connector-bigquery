@@ -1,5 +1,3 @@
-package org.wso2.carbon.connector;
-
 /*
  *  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -18,6 +16,8 @@ package org.wso2.carbon.connector;
  * under the License.
  */
 
+package org.wso2.carbon.connector;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,14 +30,7 @@ import org.wso2.carbon.connector.core.util.ConnectorUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.Signature;
-import java.security.SignatureException;
-import java.security.UnrecoverableKeyException;
+import java.security.*;
 import java.security.cert.CertificateException;
 
 /**
@@ -48,22 +41,10 @@ public class CreateJWT extends AbstractConnector {
     private static final Log log = LogFactory.getLog(CreateJWT.class);
     public static String keyAlias = JWTConstant.KEYALIAS;
 
-    public void connect(MessageContext messageContext) {
-        try {
-            String token = getJsonWebToken(messageContext);
-            messageContext.setProperty(JWTConstant.JWT_PROP, token);
-
-        } catch (IOException | InvalidKeyException | SignatureException |
-                NoSuchAlgorithmException | UnrecoverableKeyException | CertificateException |
-                KeyStoreException e) {
-            handleException(e.getMessage(), e, messageContext);
-        }
-    }
-
     /**
      * The method to sign the byte array of data using the private key.
      *
-     * @param data the byte array of data to generate the signature
+     * @param data       the byte array of data to generate the signature
      * @param privateKey the private key to sign the byte array
      * @return the signed signature
      * @throws InvalidKeyException
@@ -82,7 +63,7 @@ public class CreateJWT extends AbstractConnector {
     /**
      * The method is using to extract the private key from the p12 file
      *
-     * @param keyFile the p12 file to extract the private key
+     * @param keyFile  the p12 file to extract the private key
      * @param password the password to extract the p12 file
      * @return the private key
      * @throws KeyStoreException
@@ -102,6 +83,7 @@ public class CreateJWT extends AbstractConnector {
 
     /**
      * The method is using to construct the Json Web Token
+     *
      * @param messageContext the message context
      * @return the json web token
      * @throws InvalidKeyException
@@ -178,5 +160,17 @@ public class CreateJWT extends AbstractConnector {
             throw new SynapseException(e.getMessage(), e);
         }
         return token.toString();
+    }
+
+    public void connect(MessageContext messageContext) {
+        try {
+            String token = getJsonWebToken(messageContext);
+            messageContext.setProperty(JWTConstant.JWT_PROP, token);
+
+        } catch (IOException | InvalidKeyException | SignatureException |
+                NoSuchAlgorithmException | UnrecoverableKeyException | CertificateException |
+                KeyStoreException e) {
+            handleException(e.getMessage(), e, messageContext);
+        }
     }
 }
