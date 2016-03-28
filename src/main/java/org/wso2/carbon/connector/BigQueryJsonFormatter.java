@@ -46,25 +46,21 @@ public class BigQueryJsonFormatter extends AbstractConnector {
      * @return the formatted json
      */
     protected String getJsonString(String jsonString) {
-        Map<String, Object> jsonObject;
-        Map<String, Object> jsonTagObject;
-        String escaped;
-        JSONObject json;
-        jsonObject = JSONUtils.parseJSON(jsonString);
+        Map<String, Object> jsonObject = JSONUtils.parseJSON(jsonString);
         if (jsonObject != null && !jsonObject.isEmpty()) {
             for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
                 if (entry.getKey().equals(JWTConstant.JSON)) {
-                    jsonTagObject = JSONUtils.parseJSON((entry.getValue().toString()));
+                    Map<String, Object> jsonTagObject = JSONUtils.parseJSON((entry.getValue().toString()));
                     for (Map.Entry<String, Object> jsonEntry : jsonTagObject.entrySet()) {
                         if (jsonEntry.getValue().toString().contains(JWTConstant.JSON_START_TAG)) {
-                            escaped = jsonEntry.getValue().toString().replace("\"", "\\\"");
+                            String escaped = jsonEntry.getValue().toString().replace("\"", "\\\"");
                             jsonTagObject.put(jsonEntry.getKey(), escaped);
                         }
                     }
                     jsonObject.put(entry.getKey(), jsonTagObject);
                 }
             }
-            json = new JSONObject(jsonObject);
+            JSONObject json = new JSONObject(jsonObject);
             return json.toString().replace("\\\\", "");
         }
         return null;
