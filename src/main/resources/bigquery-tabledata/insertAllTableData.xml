@@ -16,6 +16,7 @@
  ~  specific language governing permissions and limitations
  ~  under the License.
 -->
+        
 <!-- Method Documentation URL: https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list -->
 <template name="insertAllTableData" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="datasetId" description="The Id of the dataset which the table is belongs to."/>
@@ -36,6 +37,26 @@
         <property name="uri.var.ignoreUnknownValues" expression="$func:ignoreUnknownValues"/>
         <property name="uri.var.templateSuffix" expression="$func:templateSuffix"/>
         <property name="uri.var.jsonPay" expression="$func:jsonPay"/>
+        <class name="org.wso2.carbon.connector.BigQueryJsonFormatter"/>
+        <property name="uri.var.formattedJsonPayload" expression="get-property('uri.var.formattedJsonPay')"/>
+        <script language="js">
+            <![CDATA[
+            var payload = mc.getPayloadJSON();
+            var skipInvalidRows = mc.getProperty("uri.var.skipInvalidRows");
+            var ignoreUnknownValues = mc.getProperty("uri.var.ignoreUnknownValues");
+            var templateSuffix = mc.getProperty("uri.var.templateSuffix");
+            if(skipInvalidRows != null && skipInvalidRows != ""){
+                payload.skipInvalidRows = skipInvalidRows;
+            }
+            if(ignoreUnknownValues != null && ignoreUnknownValues != ""){
+                payload.ignoreUnknownValues = ignoreUnknownValues;
+            }
+            if(templateSuffix != null && templateSuffix != ""){
+                payload.templateSuffix = templateSuffix;
+            }
+            mc.setPayloadJSON(payload);
+            ]]>
+        </script>
         <payloadFactory media-type="json">
             <format>
                 {
@@ -52,27 +73,12 @@
                 <arg expression="get-property('uri.var.skipInvalidRows')"/>
                 <arg expression="get-property('uri.var.ignoreUnknownValues')"/>
                 <arg expression="get-property('uri.var.templateSuffix')"/>
-                <arg expression="get-property('uri.var.jsonPay')"/>
+                <arg expression="get-property('uri.var.formattedJsonPayload')"/>
             </args>
         </payloadFactory>
-        <script language="js">
-            <![CDATA[
-            var payload = mc.getPayloadJSON();
-            var skipInvalidRows = mc.getProperty("uri.var.skipInvalidRows");
-            var ignoreUnknownValues = mc.getProperty("uri.var.ignoreUnknownValues");
-            var templateSuffix = mc.getProperty("uri.var.templateSuffix");
-            if(skipInvalidRows != null && skipInvalidRows != ""){
-                payload.skipInvalidRows = skipInvalidRows;
-            }
-            if(ignoreUnknownValues != null && ignoreUnknownValues != ""){
-                payload.ignoreUnknownValues = ignoreUnknownValues;
-            }
-              if(templateSuffix != null && templateSuffix != ""){
-                payload.templateSuffix = templateSuffix;
-            }
-            mc.setPayloadJSON(payload);
-            ]]>
-        </script>
+        <property name="messageType" value="application/json" scope="axis2"/>
+        <header name="Content-Type" value="application/json" scope="transport"/>
+        <header name="Content-Encoding" action="remove" scope="transport"/>
         <call>
             <endpoint>
                 <http method="Post"

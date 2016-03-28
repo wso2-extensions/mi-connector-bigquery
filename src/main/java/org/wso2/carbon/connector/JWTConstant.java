@@ -1,5 +1,3 @@
-package org.wso2.carbon.connector;
-
 /*
  *  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
@@ -18,8 +16,10 @@ package org.wso2.carbon.connector;
  * under the License.
  */
 
+package org.wso2.carbon.connector;
+
 /**
- *The constants for BigQuery
+ * The constants for BigQuery
  */
 public class JWTConstant {
 
@@ -42,4 +42,8 @@ public class JWTConstant {
     public static final String UTF = "UTF-8";
     public static final String TOKEN_ENDPOINT = "https://www.googleapis.com/oauth2/v4/token";
     public static final String JWT_PROP = "uri.var.jwt";
+    public static final String JSON = "json";
+    public static final String JSON_START_TAG = "{";
+    public static final String JSON_PAYLOAD = "uri.var.jsonPay";
+    public static final String FORMATTED_JSON_PAYLOAD = "uri.var.formattedJsonPay";
 }
