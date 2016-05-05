@@ -86,17 +86,20 @@ public class CreateJWT extends AbstractConnector {
      * @param password the password to extract the p12 file
      * @return the private key
      * @throws KeyStoreException
-     * @throws IOException
      * @throws NoSuchAlgorithmException
      * @throws CertificateException
      * @throws UnrecoverableKeyException
      */
     private static PrivateKey getPrivateKey(String keyFile, String password)
-            throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException,
+            throws KeyStoreException, NoSuchAlgorithmException, CertificateException,
             UnrecoverableKeyException {
 
         KeyStore keystore = KeyStore.getInstance(JWTConstant.KEY_STORE);
-        keystore.load(new FileInputStream(keyFile), password.toCharArray());
+        try {
+            keystore.load(new FileInputStream(keyFile), password.toCharArray());
+        } catch (IOException e) {
+            throw new SynapseException("PKCS12 file not found in the location" + e.getMessage(), e);
+        }
         return (PrivateKey) keystore.getKey(keyAlias, password.toCharArray());
     }
 
