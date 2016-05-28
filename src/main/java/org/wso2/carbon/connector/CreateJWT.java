@@ -95,10 +95,11 @@ public class CreateJWT extends AbstractConnector {
             UnrecoverableKeyException {
 
         KeyStore keystore = KeyStore.getInstance(JWTConstant.KEY_STORE);
+
         try {
             keystore.load(new FileInputStream(keyFile), password.toCharArray());
         } catch (IOException e) {
-            throw new SynapseException("PKCS12 file not found in the location" + e.getMessage(), e);
+            log.error("PKCS12 file not found in the location : " + e.getMessage(), e);
         }
         return (PrivateKey) keystore.getKey(keyAlias, password.toCharArray());
     }
