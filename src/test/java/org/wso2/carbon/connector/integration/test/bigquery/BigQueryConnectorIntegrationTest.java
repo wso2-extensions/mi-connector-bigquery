@@ -263,6 +263,7 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         String apiEndPoint = apiUrl + "/projects/" + connectorProperties.getProperty("projectId") + "/datasets/"
                 + connectorProperties.getProperty("datasetId") + "?fields=INVALID";
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("message"), apiRestResponse
                 .getBody().getJSONObject("error").getString("message"));
