@@ -52,7 +52,6 @@ public class CreateJWT extends AbstractConnector {
         try {
             String token = getJsonWebToken(messageContext);
             messageContext.setProperty(JWTConstant.JWT_PROP, token);
-
         } catch (IOException | InvalidKeyException | SignatureException |
                 NoSuchAlgorithmException | UnrecoverableKeyException | CertificateException |
                 KeyStoreException e) {
