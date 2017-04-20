@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- ~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
  ~  WSO2 Inc. licenses this file to you under the Apache License,
  ~  Version 2.0 (the "License"); you may not use this file except
@@ -56,18 +56,6 @@
                       uri-template="{uri.var.apiUrl}/bigquery/v2/projects/{uri.var.projectId}/datasets/{uri.var.datasetId}/tables{+uri.var.urlQuery}"/>
             </endpoint>
         </call>
-        <property name="uri.var.statusCode" expression="$axis2:HTTP_SC"/>
-        <!-- If the call fails with 401 Unauthorized, then get a new access token by calling getAccessTokenFromRefreshToken
-           method. -->
-        <filter xpath="get-property('uri.var.statusCode') = 401 and get-property('uri.var.refreshTokenNegotiated') = 'false'">
-            <then>
-                <bigquery.getAccessTokenFromRefreshToken/>
-                <header name="Authorization"
-                        expression="fn:concat('Bearer ', get-property('uri.var.accessToken'))"
-                        scope="transport"/>
-                <bigquery.listTables/>
-            </then>
-        </filter>
         <!-- Remove custom Headers from the API Response -->
         <header name="Expires" action="remove" scope="transport"/>
         <header name="Cache-Control" action="remove" scope="transport"/>

@@ -1,8 +1,13 @@
 {
   "apiUrl": "%s(apiUrl)",
+  "clientId": "%s(clientId)",
+  "clientSecret": "%s(clientSecret)",
+  "refreshToken": "%s(refreshToken)",
+  "accessToken": "%s(accessToken)",
   "projectId": "%s(projectId)",
   "fields": "kind,id",
   "prettyPrint": "true",
+  "registryPath": "%s(registryPath)",
   "quotaUser": "UserProjects",
   "userIp": "192.168.2.2",
   "datasetId": "%s(datasetId)"

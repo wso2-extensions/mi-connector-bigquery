@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- ~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
  ~  WSO2 Inc. licenses this file to you under the Apache License,
  ~  Version 2.0 (the "License"); you may not use this file except
@@ -23,6 +23,11 @@
     <target>
         <inSequence>
             <property name="apiUrl" expression="json-eval($.apiUrl)"/>
+            <property name="clientId" expression="json-eval($.clientId)"/>
+            <property name="refreshToken" expression="json-eval($.refreshToken)"/>
+            <property name="clientSecret" expression="json-eval($.clientSecret)"/>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <property name="registryPath" expression="json-eval($.registryPath)"/>
             <property name="maxResults" expression="json-eval($.maxResults)"/>
             <property name="pageToken" expression="json-eval($.pageToken)"/>
             <property name="fields" expression="json-eval($.fields)"/>
@@ -41,21 +46,31 @@
             <property name="defaultProjectId" expression="json-eval($.defaultProjectId)"/>
             <property name="maxResults" expression="json-eval($.maxResults)"/>
             <property name="kind" expression="json-eval($.kind)"/>
-            <switch source="get-property('transport','Action')">
+            <property name="action" expression="get-property('transport','Action')"/>
+            <switch source="get-property('action')">
                 <case regex="urn:getAccessTokenFromRefreshToken">
                     <bigquery.getAccessTokenFromRefreshToken>
                         <apiUrl>{$ctx:apiUrl}</apiUrl>
+                        <clientSecret>{$ctx:clientSecret}</clientSecret>
+                        <clientId>{$ctx:clientId}</clientId>
+                        <refreshToken>{$ctx:refreshToken}</refreshToken>
+                        <registryPath>{$ctx:registryPath}</registryPath>
                     </bigquery.getAccessTokenFromRefreshToken>
                 </case>
                 <default>
                     <bigquery.init>
                         <apiUrl>{$ctx:apiUrl}</apiUrl>
+                        <accessToken>{$ctx:accessToken}</accessToken>
+                        <clientSecret>{$ctx:clientSecret}</clientSecret>
+                        <clientId>{$ctx:clientId}</clientId>
+                        <refreshToken>{$ctx:refreshToken}</refreshToken>
+                        <registryPath>{$ctx:registryPath}</registryPath>
                         <fields>{$ctx:fields}</fields>
                         <prettyPrint>{$ctx:prettyPrint}</prettyPrint>
                         <quotaUser>{$ctx:quotaUser}</quotaUser>
                         <userIp>{$ctx:userIp}</userIp>
                     </bigquery.init>
-                    <switch source="get-property('transport','Action')">
+                    <switch source="get-property('action')">
                         <case regex="urn:listProjects">
                             <bigquery.listProjects>
                                 <maxResults>{$ctx:maxResults}</maxResults>

@@ -1,6 +1,10 @@
 {
   "apiUrl": "%s(apiUrl)",
   "accessToken": "%s(accessToken)",
+  "clientId": "%s(clientId)",
+  "clientSecret": "%s(clientSecret)",
+  "refreshToken": "%s(refreshToken)",
+  "registryPath": "%s(registryPath)",
   "datasetId": "%s(datasetId)",
   "projectId": "%s(projectId)"
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- ~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
  ~  WSO2 Inc. licenses this file to you under the Apache License,
  ~  Version 2.0 (the "License"); you may not use this file except
@@ -22,30 +22,20 @@
     <parameter name="authorizationCode"
                description="Authorization code to be used to obtain the access token."/>
     <parameter name="redirectUrl"
-               description="Authorization code to be used to obtain the access token."/>
+               description="Redirect URL to be used to obtain the access token."/>
+    <parameter name="clientId"
+               description="Value of your API Key given when you registered your application with BigQuery."/>
+    <parameter name="clientSecret"
+               description="Value of your secret key given when you registered your application with BigQuery."/>
+    <parameter name="registryPath"
+               description="Registry Path of the Connector where the values are stored"/>
     <sequence>
         <property name="uri.var.apiUrl" expression="$func:apiUrl"/>
         <property name="uri.var.authorizationCode" expression="$func:authorizationCode"/>
         <property name="uri.var.redirectUrl" expression="$func:redirectUrl"/>
-        <!-- If the user sends the apiUrl it will be used, else it'll be fetched from the registry. -->
-        <filter source="boolean(get-property('uri.var.apiUrl'))" regex="false">
-            <then>
-                <property name="uri.var.apiUrl"
-                          expression="get-property('registry', 'connectors/BigQuery/apiUrl')"/>
-            </then>
-        </filter>
-        <!-- If the user sends the redirectUrl it will be used, else it'll be fetched from the registry. -->
-        <filter source="boolean(get-property('uri.var.redirectUrl'))" regex="false">
-            <then>
-                <property name="uri.var.redirectUrl"
-                          expression="get-property('registry', 'connectors/BigQuery/redirectUrl')"/>
-            </then>
-        </filter>
-        <property name="uri.var.clientId"
-                  expression="get-property('registry', 'connectors/BigQuery/clientId')"/>
-        <property name="uri.var.clientSecret"
-                  expression="get-property('registry', 'connectors/BigQuery/clientSecret')"/>
-        <!-- Type of the grant used to get a new access token by negotiating the refresh token. -->
+        <property name="uri.var.clientSecret" expression="$func:clientSecret"/>
+        <property name="uri.var.clientId" expression="$func:clientId"/>
+        <property name="uri.var.registryPath" expression="$func:registryPath"/>
         <property name="uri.var.grantType" value="authorization_code"/>
         <payloadFactory media-type="json">
             <format>
@@ -74,32 +64,33 @@
         <!-- Setting the access token and refresh token to the property. -->
         <property name="uri.var.accessToken" expression="json-eval($.access_token)"/>
         <property name="uri.var.refreshToken" expression="json-eval($.refresh_token)"/>
+        <filter source="boolean($ctx:uri.var.registryPath)" regex="false">
+            <then>
+                <property name="uri.var.accessTokenRegistryPath"
+                          value="connectors/bigquery/accessToken"/>
+            </then>
+            <else>
+                <property name="uri.var.accessTokenRegistryPath"
+                          expression="$ctx:uri.var.registryPath"/>
+            </else>
+        </filter>
         <script language="js">
             <![CDATA[
-             importPackage(Packages.org.apache.synapse.config);
-             var newAccessToken = mc.getProperty('uri.var.accessToken');
-             if(newAccessToken != null && newAccessToken != ''){
-                var existingAccessToken = mc.getConfiguration().getRegistry().getResource("connectors/BigQuery/accessToken");
+                importPackage(Packages.org.apache.synapse.config);
+                var newAccessToken = mc.getProperty('uri.var.accessToken');
+                var newAccessRegistryPath = mc.getProperty('uri.var.accessTokenRegistryPath');
+                if(newAccessToken != null && newAccessToken != ''){
+                var existingAccessToken =mc.getConfiguration().getRegistry().getResource(newAccessRegistryPath);
                 if(existingAccessToken == null){
-                  // Create the registry entry if no such entry exists.
-                  mc.getConfiguration().getRegistry().newResource("connectors/BigQuery/accessToken", newAccessToken);
+                // Create the registry entry if no such entry exists.
+                mc.getConfiguration().getRegistry().newResource(newAccessRegistryPath,false);
+                mc.getConfiguration().getRegistry().updateResource(newAccessRegistryPath,newAccessToken);
                 } else {
-                  // Update the registry entry if it already exists.
-                  mc.getConfiguration().getRegistry().updateResource("connectors/BigQuery/accessToken", newAccessToken);
-                }     
-             }      
-             var newRefreshToken = mc.getProperty('uri.var.refreshToken');
-             if(newRefreshToken != null && newRefreshToken != ''){
-                var existingRefreshToken = mc.getConfiguration().getRegistry().getResource("connectors/BigQuery/refreshToken");
-                if(existingRefreshToken == null){
-                  // Create the registry entry if no such entry exists.
-                  mc.getConfiguration().getRegistry().newResource("connectors/BigQuery/refreshToken", newRefreshToken);
-                } else {
-                  // Update the registry entry if it already exists.
-                  mc.getConfiguration().getRegistry().updateResource("connectors/BigQuery/refreshToken", newRefreshToken);
-                }     
-             }                                    
-         ]]>
+                // Update the registry entry if it already exists.
+                mc.getConfiguration().getRegistry().updateResource(newAccessRegistryPath,newAccessToken);
+                }
+        }
+        ]]>
         </script>
         <!-- Remove custom Headers from the API Response -->
         <header name="Alt-Svc" action="remove" scope="transport"/>
