@@ -43,7 +43,7 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init("bigquery-connector-1.0.5");
+        init("bigquery-connector-1.0.6-SNAPSHOT");
 
         esbRequestHeadersMap.put("Accept-Charset", "UTF-8");
         esbRequestHeadersMap.put("Content-Type", "application/json");
