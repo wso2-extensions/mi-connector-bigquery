@@ -1,3 +1,7 @@
 {
-  "apiUrl": "%s(apiUrl)"
+  "apiUrl": "%s(apiUrl)",
+  "clientId": "%s(clientId)",
+  "clientSecret": "%s(clientSecret)",
+  "registryPath": "%s(registryPath)",
+  "refreshToken": "%s(refreshToken)"
 }
