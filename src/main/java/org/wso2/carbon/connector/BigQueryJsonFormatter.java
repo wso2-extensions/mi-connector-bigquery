@@ -18,9 +18,11 @@
 
 package org.wso2.carbon.connector;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.oltu.oauth2.common.utils.JSONUtils;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseException;
+import org.apache.synapse.SynapseLog;
 import org.json.JSONObject;
 import org.wso2.carbon.connector.core.AbstractConnector;
 
@@ -30,13 +32,12 @@ import java.util.Map;
  * Format the json to support bigQuery table schema string
  */
 public class BigQueryJsonFormatter extends AbstractConnector {
+
+
     public void connect(MessageContext messageContext) {
-        try {
-            String jsonObject = getJsonString((String) messageContext.getProperty(JWTConstant.JSON_PAYLOAD));
-            messageContext.setProperty(JWTConstant.FORMATTED_JSON_PAYLOAD, jsonObject);
-        } catch (Exception e) {
-            throw new SynapseException("Error while formatting the json", e);
-        }
+        SynapseLog synapseLog = getLog(messageContext);
+        String jsonObject = formatJsonString((String) messageContext.getProperty(JWTConstant.JSON_PAYLOAD), synapseLog);
+        messageContext.setProperty(JWTConstant.FORMATTED_JSON_PAYLOAD, jsonObject);
     }
 
     /**
@@ -45,24 +46,30 @@ public class BigQueryJsonFormatter extends AbstractConnector {
      * @param jsonString the json payload
      * @return the formatted json
      */
-    protected String getJsonString(String jsonString) {
-        Map<String, Object> jsonObject = JSONUtils.parseJSON(jsonString);
-        if (jsonObject != null && !jsonObject.isEmpty()) {
-            for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-                if (entry.getKey().equals(JWTConstant.JSON)) {
-                    Map<String, Object> jsonTagObject = JSONUtils.parseJSON((entry.getValue().toString()));
-                    for (Map.Entry<String, Object> jsonEntry : jsonTagObject.entrySet()) {
-                        if (jsonEntry.getValue().toString().contains(JWTConstant.JSON_START_TAG)) {
-                            String escaped = jsonEntry.getValue().toString().replace("\"", "\\\"");
-                            jsonTagObject.put(jsonEntry.getKey(), escaped);
+    private String formatJsonString(String jsonString, SynapseLog synapseLog) {
+        if (StringUtils.isEmpty(jsonString)) {
+            synapseLog.error("Invalid request. No jsonPay(row data) present in the request.");
+            throw new SynapseException("Invalid request. No jsonPay(row data) present in the request.");
+        } else {
+            try {
+                Map<String, Object> jsonObject = JSONUtils.parseJSON(jsonString);
+                for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
+                    if (entry.getKey().equals(JWTConstant.JSON)) {
+                        Map<String, Object> jsonTagObject = JSONUtils.parseJSON((entry.getValue().toString()));
+                        for (Map.Entry<String, Object> jsonEntry : jsonTagObject.entrySet()) {
+                            if (jsonEntry.getValue().toString().contains(JWTConstant.JSON_START_TAG)) {
+                                String escaped = jsonEntry.getValue().toString().replace("\"", "\\\"");
+                                jsonTagObject.put(jsonEntry.getKey(), escaped);
+                            }
                         }
+                        jsonObject.put(entry.getKey(), jsonTagObject);
                     }
-                    jsonObject.put(entry.getKey(), jsonTagObject);
                 }
+                JSONObject json = new JSONObject(jsonObject);
+                return json.toString().replace("\\\\", "");
+            } catch (Exception e) {
+                throw new SynapseException("Error while formatting the json", e);
             }
-            JSONObject json = new JSONObject(jsonObject);
-            return json.toString().replace("\\\\", "");
         }
-        return null;
     }
 }
