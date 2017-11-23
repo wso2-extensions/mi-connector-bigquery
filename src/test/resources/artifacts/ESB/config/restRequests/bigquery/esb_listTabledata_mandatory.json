@@ -7,5 +7,6 @@
   "registryPath": "%s(registryPath)",
   "projectId": "%s(projectId)",
   "datasetId": "%s(datasetId)",
-  "tableId": "%s(tableId)"
+  "tableId": "%s(tableId)",
+  "maxResults": "1"
 }
