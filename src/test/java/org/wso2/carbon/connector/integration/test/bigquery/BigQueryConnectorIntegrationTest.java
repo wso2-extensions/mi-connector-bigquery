@@ -43,7 +43,9 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
 
-        init("bigquery-connector-1.0.7-SNAPSHOT");
+        String connectorName = System.getProperty("connector_name") + "-connector-" +
+                System.getProperty("connector_version") + ".zip";
+        init(connectorName);
 
         esbRequestHeadersMap.put("Accept-Charset", "UTF-8");
         esbRequestHeadersMap.put("Content-Type", "application/json");
@@ -284,7 +286,7 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_listTabledata_mandatory.json");
         String apiEndpoint = apiUrl + "/projects/" + connectorProperties.getProperty("projectId") + "/datasets/"
                 + connectorProperties.getProperty("datasetId") + "/tables/" + connectorProperties.getProperty("tableId")
-                + "/data";
+                + "/data?maxResults=1";
 
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndpoint, "GET", apiRequestHeadersMap);
         Assert.assertEquals(esbRestResponse.getBody().getString("kind"), apiRestResponse.getBody().getString("kind"));

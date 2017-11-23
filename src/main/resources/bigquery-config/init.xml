@@ -168,7 +168,7 @@
                commonQueryParams += 'userIp=' + userIp + '&';
             }
             if (commonQueryParams != "") {
-               mc.setProperty('uri.var.commonQueryParams', commonQueryParams);
+               mc.setProperty('uri.var.commonQueryParams', commonQueryParams.toString());
             }
          ]]>
         </script>
