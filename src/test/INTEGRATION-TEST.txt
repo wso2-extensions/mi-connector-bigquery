@@ -8,12 +8,12 @@ Pre-requisites:
 Tested Platform: 
 
  - Mac OX 10.12.6
- - WSO2 EI 6.1.1
+ - WSO2 EI 6.2.0
  - Java 1.8
 
 Steps to follow in setting integration test.
 
- 1. Download EI 6.1.1 zip file from the official site and copy that zip file in to location "{BIGQUERY_CONNECTOR_HOME}/repository/.
+ 1. Download EI 6.2.0 zip file from the official site and extract it.
 
  2. Set authorization details:
    i)   Using the URL "https://accounts.google.com/SignUp" create a Google account.
@@ -25,7 +25,14 @@ Steps to follow in setting integration test.
    vii) Go to "Credentials" tab which is under "APIs & auth" tab and add credentials by selecting OAuth 2.0 client ID option.( Configure consent screen and then create client ID for 'Web application' type of applications. Note down the redirect uri for future use.)
    viii)Note down the client ID and client secret for future use.
    ix)  Get the authorization code by sending a GET request using url, https://accounts.google.com/o/oauth2/auth?redirect_uri=<redirect_uri>&response_type=code&client_id=<client_ID>&scope=https://www.googleapis.com/auth/bigquery&approval_prompt=force&access_type=offline (Replace <redirect_uri> and <client_ID> with the redirect uri and client ID values noted in step vii and viii. Note down the authorization code for future use.)
-   x)  Get the access token and refresh token by sending a POST request to the url https://www.googleapis.com/oauth2/v3/token with x-www-form-urlencoded body with code,client_id,client_secret,redirect_uri values noted before and with grant_type value "authorization_code" (Note down the access token and refresh token for future use.).
+   x)   Get the access token and refresh token by sending a POST request to the url https://www.googleapis.com/oauth2/v3/token with x-www-form-urlencoded body with code,client_id,client_secret,redirect_uri values noted before and with grant_type value "authorization_code" (Note down the access token and refresh token for future use.).
+   x1)  Extract the certificate from browser by navigating to "https://bigquery.cloud.google.com/"
+   x11) Go to the EI folder and place the downloaded certificate in "<ESB_HOME>/repository/resources/security/" and "<BIGQUERY_CONNECTOR_HOME>/src/test/resources/keystores/products"
+   x111)Navigate to "<EI_HOME>/repository/resources/security/" using command prompt and execute `keytool -importcert -file CERT_FILE_NAME -keystore client-truststore.jks -alias "CERT_NAME"` in command line to import Bigquery certificate in to keystore.
+       		 Give "wso2carbon" as password. Press "Y" to complete certificate import process.
+   Xiv) Navigate to "<BIGQUERY_CONNECTOR_HOME>/src/test/resources/keystores/products" using command prompt and execute `keytool -importcert -file CERT_FILE_NAME -keystore wso2carbon.jks -alias "CERT_NAME"` in command line to import Bigquery certificate in to keystore.
+             Give "wso2carbon" as password. Press "Y" to complete certificate import process.
+   xv) Compress the modified EI and place it into "{BIGQUERY_CONNECTOR_HOME}/repository/" folder.
 
  3. Update the Bigquery properties file at location "<BIGQUERY_CONNECTOR_HOME>/src/test/resources/artifacts/ESB/connector/config" as below.
 
