@@ -52,7 +52,6 @@ public class CreateJWT extends AbstractConnector {
         try {
             String token = getJsonWebToken(messageContext);
             messageContext.setProperty(JWTConstant.JWT_PROP, token);
-
         } catch (IOException | InvalidKeyException | SignatureException |
                 NoSuchAlgorithmException | UnrecoverableKeyException | CertificateException |
                 KeyStoreException e) {
@@ -63,7 +62,7 @@ public class CreateJWT extends AbstractConnector {
     /**
      * The method to sign the byte array of data using the private key.
      *
-     * @param data the byte array of data to generate the signature
+     * @param data       the byte array of data to generate the signature
      * @param privateKey the private key to sign the byte array
      * @return the signed signature
      * @throws InvalidKeyException
@@ -82,7 +81,7 @@ public class CreateJWT extends AbstractConnector {
     /**
      * The method is using to extract the private key from the p12 file
      *
-     * @param keyFile the p12 file to extract the private key
+     * @param keyFile  the p12 file to extract the private key
      * @param password the password to extract the p12 file
      * @return the private key
      * @throws KeyStoreException
@@ -105,6 +104,7 @@ public class CreateJWT extends AbstractConnector {
 
     /**
      * The method is using to construct the Json Web Token
+     *
      * @param messageContext the message context
      * @return the json web token
      * @throws InvalidKeyException
@@ -147,14 +147,14 @@ public class CreateJWT extends AbstractConnector {
 
         //Construct JWT Claim
         JSONObject jwtClaimSet = new JSONObject();
-        long iat = (System.currentTimeMillis() / 1000) - 60;
-        long exp = iat + 3600;
+        long issuedAtTime = (System.currentTimeMillis() / 1000) - 60;
+        long expirationTime = issuedAtTime + JWTConstant.TIME_TO_EXPIRE;
         try {
             jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_ISS, serviceAccount);
             jwtClaimSet.put(JWTConstant.SCOPE, scope);
             jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_AUD, JWTConstant.TOKEN_ENDPOINT);
-            jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_EXP, +exp);
-            jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_IAT, +iat);
+            jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_EXP, +expirationTime);
+            jwtClaimSet.put(JWTConstant.JWT_CLAIMSET_IAT, +issuedAtTime);
             jwtClaimStr = jwtClaimSet.toString();
         } catch (JSONException e) {
             throw new SynapseException(e.getMessage(), e);

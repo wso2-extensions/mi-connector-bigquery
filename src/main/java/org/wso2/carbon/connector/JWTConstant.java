@@ -38,6 +38,7 @@ public class JWTConstant {
     public static final String JWT_CLAIMSET_AUD = "aud";
     public static final String JWT_CLAIMSET_EXP = "exp";
     public static final String JWT_CLAIMSET_IAT = "iat";
+    public static final int TIME_TO_EXPIRE = 3600;
 
     public static final String UTF = "UTF-8";
     public static final String TOKEN_ENDPOINT = "https://www.googleapis.com/oauth2/v4/token";
