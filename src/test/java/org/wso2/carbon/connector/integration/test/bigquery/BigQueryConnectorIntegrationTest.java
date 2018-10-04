@@ -46,14 +46,15 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         String connectorName = System.getProperty("connector_name") + "-connector-" +
                 System.getProperty("connector_version") + ".zip";
         init(connectorName);
-
+        getApiConfigProperties();
         esbRequestHeadersMap.put("Accept-Charset", "UTF-8");
         esbRequestHeadersMap.put("Content-Type", "application/json");
-
         apiUrl = connectorProperties.getProperty("apiUrl") + "/bigquery/v2";
-
         apiRequestHeadersMap.putAll(esbRequestHeadersMap);
-
+        String projectId = connectorProperties.getProperty("datasetId");
+        String datasetId = connectorProperties.getProperty("datasetId");
+        connectorProperties.setProperty("query", connectorProperties.getProperty("query")
+                .replace("<projectId>", projectId).replace("<datasetId>", datasetId));
     }
 
     /**
