@@ -23,6 +23,7 @@ import org.apache.oltu.oauth2.common.utils.JSONUtils;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseException;
 import org.apache.synapse.SynapseLog;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.wso2.carbon.connector.core.AbstractConnector;
 
@@ -33,6 +34,7 @@ import java.util.Map;
  */
 public class BigQueryJsonFormatter extends AbstractConnector {
 
+    private final String JSON_ARRAY_START_CHAR = "[";
 
     public void connect(MessageContext messageContext) {
         SynapseLog synapseLog = getLog(messageContext);
@@ -52,24 +54,38 @@ public class BigQueryJsonFormatter extends AbstractConnector {
             throw new SynapseException("Invalid request. No jsonPay(row data) present in the request.");
         } else {
             try {
-                Map<String, Object> jsonObject = JSONUtils.parseJSON(jsonString);
-                for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-                    if (entry.getKey().equals(JWTConstant.JSON)) {
-                        Map<String, Object> jsonTagObject = JSONUtils.parseJSON((entry.getValue().toString()));
-                        for (Map.Entry<String, Object> jsonEntry : jsonTagObject.entrySet()) {
-                            if (jsonEntry.getValue().toString().contains(JWTConstant.JSON_START_TAG)) {
-                                String escaped = jsonEntry.getValue().toString().replace("\"", "\\\"");
-                                jsonTagObject.put(jsonEntry.getKey(), escaped);
-                            }
-                        }
-                        jsonObject.put(entry.getKey(), jsonTagObject);
+                JSONArray finalDataArray = new JSONArray();
+                if (jsonString.startsWith(JSON_ARRAY_START_CHAR)) {
+                    JSONArray jsonArray = new JSONArray(jsonString);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject rowdata = constructDataRow(jsonArray.getJSONObject(i).toString());
+                        finalDataArray.put(rowdata);
                     }
+                } else {
+                    JSONObject rowdata = constructDataRow(jsonString);
+                    finalDataArray.put(rowdata);
                 }
-                JSONObject json = new JSONObject(jsonObject);
-                return json.toString().replace("\\\\", "");
+                return finalDataArray.toString().replace("\\\\", "");
             } catch (Exception e) {
                 throw new SynapseException("Error while formatting the json", e);
             }
         }
+    }
+
+    private JSONObject constructDataRow(String jsonString) {
+        Map<String, Object> jsonObject = JSONUtils.parseJSON(jsonString);
+        for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
+            if (entry.getKey().equals(JWTConstant.JSON)) {
+                Map<String, Object> jsonTagObject = JSONUtils.parseJSON((entry.getValue().toString()));
+                for (Map.Entry<String, Object> jsonEntry : jsonTagObject.entrySet()) {
+                    if (jsonEntry.getValue().toString().contains(JWTConstant.JSON_START_TAG)) {
+                        String escaped = jsonEntry.getValue().toString().replace("\"", "\\\"");
+                        jsonTagObject.put(jsonEntry.getKey(), escaped);
+                    }
+                }
+                jsonObject.put(entry.getKey(), jsonTagObject);
+            }
+        }
+        return new JSONObject(jsonObject);
     }
 }
