@@ -34,6 +34,8 @@
                description="If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job. If the query is invalid, an error returns. The default value is false."/>
     <parameter name="useQueryCache"
                description="Whether to look for the result in the query cache. The default value is true. "/>
+    <parameter name="useLegacySql"
+               description="Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's standard SQL."/>
     <sequence>
         <property name="uri.var.projectId" expression="$func:projectId"/>
         <property name="uri.var.kind" expression="$func:kind"/>
@@ -44,6 +46,7 @@
         <property name="uri.var.timeoutMs" expression="$func:timeoutMs"/>
         <property name="uri.var.dryRun" expression="$func:dryRun"/>
         <property name="uri.var.useQueryCache" expression="$func:useQueryCache"/>
+        <property name="useLegacySql" expression="$func:useLegacySql"/>
         <payloadFactory media-type="json">
             <format>
                 {
@@ -67,6 +70,7 @@
             var timeoutMs = mc.getProperty('uri.var.timeoutMs');
             var dryRun = mc.getProperty('uri.var.dryRun');
             var useQueryCache = mc.getProperty('uri.var.useQueryCache');
+            var useLegacySql = mc.getProperty('useLegacySql');
             var jsonPayload = mc.getPayloadJSON();            
             var commonQueryParams = mc.getProperty('uri.var.commonQueryParams');
             var urlQuery = '';
@@ -93,6 +97,9 @@
             }
             if (useQueryCache != null && useQueryCache != "") {
                jsonPayload.useQueryCache = useQueryCache;
+            }
+            if (useLegacySql != null && useLegacySql != "") {
+               jsonPayload.useLegacySql = useLegacySql;
             }
             mc.setPayloadJSON(jsonPayload);
             // Add a leading '?' and remove the trailing '&'
