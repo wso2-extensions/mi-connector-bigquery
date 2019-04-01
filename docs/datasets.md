@@ -5,7 +5,7 @@
 ### Overview 
 
 The following operations allow you to work with datasets. Click the operation name to see details on how to use it.
-For a sample proxy service that illustrates how to work with datasets, see [Sample configuration](#sample-configuration).
+For a sample proxy service that illustrates how to work with datasets, see the [sample configuration](#sample-configuration).
 
 | Operation        | Description |
 | ------------- |-------------|
