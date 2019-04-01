@@ -1,4 +1,4 @@
-# Working with datasets in BigQuery
+# Working with Datasets in BigQuery
 
 [[Overview]](#overview)  [[Operation details]](#operation-details)  [[Sample configuration]](#sample-configuration)
 
