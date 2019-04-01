@@ -1,10 +1,10 @@
-# Working with Datasets in BigQuery
+# Working with datasets in BigQuery
 
 [[Overview]](#overview)  [[Operation details]](#operation-details)  [[Sample configuration]](#sample-configuration)
 
 ### Overview 
 
-The following operations allow you to work with datasets. Click an operation name to see details on how to use it.
+The following operations allow you to work with datasets. Click the operation name to see details on how to use it.
 For a sample proxy service that illustrates how to work with datasets, see [Sample configuration](#sample-configuration).
 
 | Operation        | Description |
@@ -29,7 +29,7 @@ The getDataset operation retrieves a dataset.
 ```
 
 **Properties**
-* projectId: The ID of the project which the dataset belongs to.
+* projectId: The ID of the project to which the dataset belongs.
 * datasetId: The ID of the dataset.
 
 **Sample request**
@@ -101,7 +101,7 @@ https://cloud.google.com/bigquery/docs/reference/v2/datasets/get
 
 #### Retrieving a dataset list
 
-The listDatasets operation retrieves a dataset list.
+The listDatasets operation lists a set of data.
 
 **listDatasets**
 ```xml
@@ -114,10 +114,10 @@ The listDatasets operation retrieves a dataset list.
 ```
 
 **Properties**
-* projectId: The ID of the project which the datasets belongs to.
-* maxResults: The max results per page.
+* projectId: The ID of the project to which the datasets belong.
+* maxResults: The maximum number of results per page.
 * pageToken: The page token value.
-* isAll: Boolean value to determine whether to list all datasets, including hidden ones.
+* isAll: A boolean value that determines whether to list all datasets, including hidden ones.
 
 **Sample request**
 
@@ -172,12 +172,11 @@ Given below is a sample response for the listDatasets operation.
 **Related BigQuery documentation**
 https://cloud.google.com/bigquery/docs/reference/v2/datasets/list
 
-
 ### Sample configuration
 
-Following example illustrates how to connect to BigQuery with the init operation and getDataset operation.
+Follow the steps given belwo to connect to BigQuery using the init operation and the getDataset operation.
 
-1. Create a sample proxy as below :
+1. Create a sample proxy as follows:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -230,7 +229,7 @@ Following example illustrates how to connect to BigQuery with the init operation
    <description />
 </proxy>
 ```
-2. Create an json file named getDataset.json and copy the configurations given below to it:
+2. Create a json file named getDataset.json and add the configurations given below:
 
 ```json
 {
@@ -260,7 +259,7 @@ Following example illustrates how to connect to BigQuery with the init operation
 ```bash
 curl http://localhost:8280/services/getDataset -H "Content-Type: application/json" -d @getDataset.json
 ```
-5. BigQuery returns an json response similar to the one shown below:
+5. BigQuery returns a json response similar to the one shown below:
  
 ```json
 {
