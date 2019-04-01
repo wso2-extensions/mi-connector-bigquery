@@ -176,7 +176,7 @@ https://cloud.google.com/bigquery/docs/reference/v2/datasets/list
 
 Follow the steps given below to connect to BigQuery using the init operation and the getDataset operation.
 
-1. Create a sample proxy as follows:
+1. Create a sample proxy service as follows:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
