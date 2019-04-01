@@ -10,13 +10,13 @@ For a sample proxy service that illustrates how to work with table data, see [Sa
 | Operation        | Description |
 | ------------- |-------------|
 | [listTableData](#list-the-table-data)    | Retrieves table data from a specified set of rows |
-| [insertAllTableData](#insert-all-data-to-a-table)      | Insert the data into the Table. |
+| [insertAllTableData](#insert-all-data-to-a-table)      | Inserts the data into the table. |
 
 ### Operation details
 
 This section provides further details on the operations related to table data.
 
-#### List the Table data
+#### List the table data
 
 The listTabledata operation retrieves table data from a specified set of rows.
 
@@ -33,17 +33,16 @@ The listTabledata operation retrieves table data from a specified set of rows.
 ```
 
 **Properties**
-* projectId: The ID of the project which the dataset belongs to.
-* datasetId: The ID of the dataset which the table belongs to.
+* projectId: The ID of the project to which the dataset belongs.
+* datasetId: The ID of the dataset to which the table belongs.
 * tableId: The ID of the table.
-* maxResults: The max results per page.
+* maxResults: The maximum results per page.
 * pageToken: The page token value.
-* startIndex: Zero-based index of the starting row to read.
-
+* startIndex: Zero-based index of the starting row.
 
 **Sample request**
 
-Following is a sample request that can be handled by the listTableData operation.
+Following is a sample request that can be handled by the listTableData operation:
 
 ```json
 {
@@ -124,11 +123,11 @@ The insertAllTableData operation retrieves table data from a specified set of ro
 ```
 
 **Properties**
-* datasetId: The ID of the dataset which the table belongs to.
-* projectId: The ID of the project which the datasets belongs to.
+* datasetId: The ID of the dataset to which the table belongs.
+* projectId: The ID of the project to which the datasets belongs.
 * tableId: The ID of the table.
-* skipInvalidRows: Boolean value to check whether the validation of row.
-* ignoreUnknownValues: Boolean value to check the validation of the values that match the table schema.
+* skipInvalidRows: A boolean value to check whether the row should be validated.
+* ignoreUnknownValues: A boolean value to validate whether the values match the table schema.
 * templateSuffix: Instance table.
 * jsonPay: A JSON object that contains a row of data.
 
@@ -164,7 +163,7 @@ Following is a sample request that can be handled by the insertAllTableData oper
         }
 }
 ```
-Following is a sample request to insert the multiple record.
+Following is a sample request that inserts multiple records.
 
 ```json
 {
@@ -212,9 +211,9 @@ https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll
 
 ### Sample configuration
 
-Following example illustrates how to connect to BigQuery with the init operation and listTabledata operation.
+Follow the steps given below to connect to BigQuery with the init and listTabledata operations.
 
-1. Create a sample proxy as below :
+1. Create a sample proxy service as follows:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -275,7 +274,7 @@ Following example illustrates how to connect to BigQuery with the init operation
    <description />
 </proxy>
 ```
-2. Create an json file named listTabledata.json and copy the configurations given below to it:
+2. Create a JSO  file named listTabledata.json and add the configurations given below:
 
 ```json
 {
@@ -309,7 +308,7 @@ Following example illustrates how to connect to BigQuery with the init operation
 ```bash
 curl http://localhost:8280/services/listTabledata -H "Content-Type: application/json" -d @listTabledata.json
 ```
-5. BigQuery returns an json response similar to the one shown below:
+5. BigQuery returns a JSON response similar to the one shown below:
  
 ```json
 {
