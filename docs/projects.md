@@ -11,7 +11,7 @@ The listProjects operation retrieves all projects.
 ```
 
 **Properties**
-* maxResults: The max results per page.
+* maxResults: The maximum number of results per page.
 * pageToken: The page token value.
 
 **Sample request**
@@ -75,9 +75,9 @@ https://cloud.google.com/bigquery/docs/reference/v2/projects/list
 
 ### Sample configuration
 
-Following example illustrates how to connect to BigQuery with the init operation and listProjects operation.
+Follow the steps given below to connect to BigQuery with the init and listProjects operations.
 
-1. Create a sample proxy as below :
+1. Create a sample proxy as follows:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -129,7 +129,7 @@ Following example illustrates how to connect to BigQuery with the init operation
     <description />
 </proxy>
 ```
-2. Create an json file named listProjects.json and copy the configurations given below to it:
+2. Create a JSON file named listProjects.json and add the configurations given below:
 
 ```json
 {
@@ -159,7 +159,7 @@ Following example illustrates how to connect to BigQuery with the init operation
 ```bash
 curl http://localhost:8280/services/listProjects -H "Content-Type: application/json" -d @listProjects.json
 ```
-5. BigQuery returns an json response similar to the one shown below:
+5. BigQuery returns a JSON response similar to the one shown below:
  
 ```json
 {
