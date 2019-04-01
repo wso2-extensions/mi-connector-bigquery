@@ -42,13 +42,7 @@ The **BigQuer**y API requires all requests to be authenticated as a user or a se
     <apiUrl>{$ctx:apiUrl}</apiUrl>
     <accessToken>{$ctx:accessToken}</accessToken>
     <clientSecret>{$ctx:clientSecret}</clientSecret>
-    <client
-            
-            
-            
-            
-            
-            >{$ctx:clientId}</clientId>
+    <client>{$ctx:clientId}</clientId>
     <refreshToken>{$ctx:refreshToken}</refreshToken>
     <registryPath>{$ctx:registryPath}</registryPath>
     <fields>{$ctx:fields}</fields>
