@@ -1,6 +1,6 @@
 # Working with Jobs in BigQuery
 
-The runQuery operation runs a BigQuery SQL query and returns results if the query completes within a specified timeout.
+The runQuery operation runs an SQL query (BigQuery) and returns results if the query completes within a specified timeout.
 
 **runQuery**
 ```xml
@@ -19,16 +19,16 @@ The runQuery operation runs a BigQuery SQL query and returns results if the quer
 ```
 
 **Properties**
-* useQueryCache: Whether to look for the result in the query cache. The default value is true.
-* timeoutMs: How long to wait for the query to complete, in milliseconds, before the request times out and returns. 
-* query: Required - A query string, following the BigQuery query syntax of the query to execute.
-* dryRun: If set to true, BigQuery does not run the job. Instead, if the query is valid, BigQuery returns statistics about the job. If the query is invalid, an error returns. The default value is false.
-* defaultProjectId: The ID of the project containing this dataset.
-* defaultDatasetId: Required - A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters. 
-* projectId: The project ID of the project billed for the query.
-* maxResults: The maximum number of rows of data to return per page of results. Responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies.
+* useQueryCache: Specifies whether to look for the result in the query cache. The default value is true.
+* timeoutMs: Specifies how long (in milliseconds) the system should wait for the query to complete before expiring and returning the request. 
+* query: A query string (required) that complies with the BigQuery query syntax.
+* dryRun: If set to **true**, BigQuery does not run the job. Instead, if the query is valid, BigQuery returns statistics about the job. If the query is invalid, an error returns. The default value is **false**.
+* defaultProjectId: The ID of the project that contains this dataset.
+* defaultDatasetId: A unique ID (required) for this dataset without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters. 
+* projectId: The ID of the project that is billed for the query.
+* maxResults: The maximum number of rows of data (results) to return per page. Responses are also limited to 10 MB. By default, there is no maximum row count and only the byte limit applies.
 * kind: The resource type of the request.
-* useLegacySql: Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's standard SQL. For information on use BigQuery's standard SQL, see https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql.
+* useLegacySql: Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is **true**. If set to **false**, the query will use BigQuery's standard SQL. For information on BigQuery's standard SQL, see https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql.
 
 **Sample request**
 
@@ -120,9 +120,9 @@ https://cloud.google.com/bigquery/docs/reference/v2/jobs/query
 
 ### Sample configuration
 
-Following example illustrates how to connect to BigQuery with the init operation and runQuery operation.
+Follow the steps given below to connect to BigQuery with the init and runQuery operations.
 
-1. Create a sample proxy as below :
+1. Create a sample proxy as follows:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -188,7 +188,7 @@ Following example illustrates how to connect to BigQuery with the init operation
    <description/>
   </proxy>
 ```
-2. Create an json file named runQuery.json and copy the configurations given below to it:
+2. Create a JSON file named runQuery.json and add the configurations given below:
 
 ```json
 {
@@ -224,7 +224,7 @@ Following example illustrates how to connect to BigQuery with the init operation
 ```bash
 curl http://localhost:8280/services/runQuery -H "Content-Type: application/json" -d @runQuery.json
 ```
-5. BigQuery returns an json response similar to the one shown below:
+5. BigQuery returns a JSON response similar to the one shown below:
  
 ```json
 {
