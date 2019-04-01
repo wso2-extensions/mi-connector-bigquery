@@ -229,7 +229,7 @@ Follow the steps given below to connect to BigQuery using the init operation and
    <description />
 </proxy>
 ```
-2. Create a json file named getDataset.json and add the configurations given below:
+2. Create a JSON file named getDataset.json and add the configurations given below:
 
 ```json
 {
@@ -259,7 +259,7 @@ Follow the steps given below to connect to BigQuery using the init operation and
 ```bash
 curl http://localhost:8280/services/getDataset -H "Content-Type: application/json" -d @getDataset.json
 ```
-5. BigQuery returns a json response similar to the one shown below:
+5. BigQuery returns a JSON response similar to the one shown below:
  
 ```json
 {
