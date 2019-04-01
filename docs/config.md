@@ -10,16 +10,17 @@
    2. Go to "https://developers.google.com/oauthplayground/".
    3. Select all the scopes available under **Select & authorize APIs** to authorize the BigQuery API.
    4. Select **Exchange authorization code for tokens** and click **Exchange authorization code for token**. You can then get the access token from the **Access token** section. Be sure to note the access token for future use.
-   5. Go to "https://console.developers.google.com/" and log in with the google account you already created. You can then create a new project using the dropdown in the top bar. Be sure to note the project Id for future use. 
+   5. Go to "https://console.developers.google.com/" and log in with the google account you already created. You can then create a new project using the drop down option in the top menu. Be sure to note the project Id for future use. 
    6. Go to the **API** tab under **APIs & auth** and enable the **BigQuery** API.
-   7. Go to the **Credentials** tab under **APIs & auth**, select **OAuth 2.0 client ID**, and add the credentials.(Configure the consent screen and then create a client ID for a **Web application**. Be sure to note the redirect uri for future use.)
+   7. Go to the **Credentials** tab under **APIs & auth**, select **OAuth 2.0 client ID**, and add the credentials. You need to configure the consent screen and then create a client ID for a **Web application**. Be sure to note the redirect uri for future use.
    8. Note the client ID and client secret for future use.
-   9. Get the authorization code by sending a GET request to the following URL (replace the <redirect_uri> and <client_ID> with the redirect uri and client ID values noted in the previous steps. Note the authorization code for future use): https://accounts.google.com/o/oauth2/auth?redirect_uri=<redirect_uri>&response_type=code&client_id=<client_ID>&scope=https://www.googleapis.com/auth/bigquery&approval_prompt=force&access_type=offline.
-   10. Get the access token and refresh token by sending a POST request to URL given below. Be sure to use an x-www-form-urlencoded body with the code, client_id, client_secret, and redirect_uri values noted before, and also set the grant_type to **authorization_code**. Note the access token and refresh token for future use.
+   9. Get the authorization code by sending a GET request to the following URL (replace the <redirect_uri> and <client_ID> with the redirect uri and client ID values noted in the previous steps): https://accounts.google.com/o/oauth2/auth?redirect_uri=<redirect_uri>&response_type=code&client_id=<client_ID>&scope=https://www.googleapis.com/auth/bigquery&approval_prompt=force&access_type=offline.
+      Note the authorization code for future use.
+  10. Get the access token and refresh token by sending a POST request to the URL given below. Be sure to use an x-www-form-urlencoded body with the <code>, <client_id>, <client_secret>, and <redirect_uri> values noted before, and also set the grant_type to **authorization_code**. Note the access token and refresh token for future use.
 
        https://www.googleapis.com/oauth2/v3/token.
 
-### Using service account
+### Using the service account
    
    1. Open the [Service Accounts](https://console.cloud.google.com/projectselector2/iam-admin/serviceaccounts?) page in the GCP console.
    2. Click **Select** to open a project.
@@ -41,7 +42,13 @@ The **BigQuer**y API requires all requests to be authenticated as a user or a se
     <apiUrl>{$ctx:apiUrl}</apiUrl>
     <accessToken>{$ctx:accessToken}</accessToken>
     <clientSecret>{$ctx:clientSecret}</clientSecret>
-    <clientId>{$ctx:clientId}</clientId>
+    <client
+            
+            
+            
+            
+            
+            >{$ctx:clientId}</clientId>
     <refreshToken>{$ctx:refreshToken}</refreshToken>
     <registryPath>{$ctx:registryPath}</registryPath>
     <fields>{$ctx:fields}</fields>
@@ -52,23 +59,23 @@ The **BigQuer**y API requires all requests to be authenticated as a user or a se
 ```
 **Properties** 
 * apiUrl: The base endpoint URL of the BigQuery API.
-* accessToken: OAuth token for the BigQuery API.
-* clientId:  Client Id for the BigQuery API.
-* clientSecret: Client Secret for the BigQuery API.
-* refreshToken: RefreshToken for BigQuery API.
-* registryPath: Registry path to save the access token.
+* accessToken: The OAuth token for the BigQuery API.
+* clientId:  The client ID for the BigQuery API.
+* clientSecret: The client Secret for the BigQuery API.
+* refreshToken: The refresh token for the BigQuery API.
+* registryPath: The registry path to save the access token.
 * fields: List of fields to be returned in the response.
-* callback: Name of the JavaScript callback function that handles the response. Used in JavaScript JSON-P requests.
-* apiKey: API key. Required, unless you provide an OAuth 2.0 token.
-* prettyPrint: Returns response with indentations and line breaks. If the property is **true**, the response is returned in a human-readable format.
-* quotaUser: Alternative to userIp. Lets you enforce per-user quotas from a server-side application even in cases when the user's IP address is unknown.
+* callback: The name of the JavaScript callback function that handles the response. Used in JavaScript JSON-P requests.
+* apiKey: The API key. Required unless you provide an OAuth 2.0 token.
+* prettyPrint: Returns the response with indentations and line breaks. If the property is **true**, the response is returned in a human-readable format.
+* quotaUser: Alternative to userIp. Lets you enforce per-user quotas from a server-side application even in cases where the user's IP address is unknown.
 * userIp: IP address of the end user for whom the API call is being made. Lets you enforce per-user quotas when calling the API from a server-side application.
 * ifMatch: Etag value to use for returning a page of list values if the values have not changed.
 * ifNoneMatch: Etag value to use for returning a page of list values if the values have changed.
 
 or 
 
-You can use only the below (getAccessTokenFromServiceAccount) to get the access token and do all the other operations.
+You can use only the below operation (getAccessTokenFromServiceAccount) to get the access token and to do all the other operations.
 
 **getAccessTokenFromServiceAccount**
 ```xml
@@ -116,11 +123,11 @@ Following is a sample request that can be handled by the getAccessTokenFromServi
 ```
 **Properties** 
 * apiUrl: The base endpoint URL of the BigQuery API.
-* authorizationCode: Authorization code to be used to obtain the access token.
-* redirectUrl: Redirect URL to be used in the OAuth 2.0 authorization flow.
-* clientId:  Client Id for the BigQuery API.
-* clientSecret: Client secret for the BigQuery API.
-* registryPath: Registry path to save the access token.
+* authorizationCode: The authorization code to be used for obtaining the access token.
+* redirectUrl: The redirect URL to be used in the OAuth 2.0 authorization flow.
+* clientId:  The client ID for the BigQuery API.
+* clientSecret: The client secret for the BigQuery API.
+* registryPath: The registry path to save the access token.
 
 When the getAccessTokenFromAuthorizationCode operation is executed, the new values will be updated to the accessToken and refreshToken registry entries.
 
