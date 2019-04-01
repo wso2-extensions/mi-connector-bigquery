@@ -1,4 +1,4 @@
-# BigQuery EI Connector
+# BigQuery WSO2 EI Connector
 
 The BigQuery [connector](https://docs.wso2.com/display/EI640/Working+with+Connectors) allows you to access the [BigQuery REST API](https://cloud.google.com/bigquery/docs/reference/rest/v2/) through WSO2 ESB. BigQuery is a tool that allows you to execute SQL-like queries on large amounts of data at an outstanding speed.
 
