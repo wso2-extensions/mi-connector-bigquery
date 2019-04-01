@@ -1,6 +1,6 @@
 # Configuring the BigQuery Fault Handler Sequence
 
-Following is a sample proxy service and fault handler sequence you can use as a starting point for handling faults when integrating with BigQuery. Customize this sample to match your requirements.
+The following is a sample proxy service and fault handler sequence, which you can use as a starting point for handling faults when integrating with BigQuery. Customize this sample to match your requirements.
 
 **Sample Proxy**
 ```xml
