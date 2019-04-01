@@ -274,7 +274,7 @@ Follow the steps given below to connect to BigQuery with the init and listTabled
    <description />
 </proxy>
 ```
-2. Create a JSO  file named listTabledata.json and add the configurations given below:
+2. Create a JSON file named listTabledata.json and add the configurations given below:
 
 ```json
 {
