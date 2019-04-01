@@ -30,9 +30,9 @@ The getTable operation retrieves a table by ID.
 ```
 
 **Properties**
-* tableId: Table ID of the requested table.
-* datasetId: Dataset ID of the requested table.
-* projectId: Project ID of the requested table.
+* tableId: The ID of the requested table.
+* datasetId: The dataset ID of the requested table.
+* projectId: The project ID of the requested table.
 
 **Sample request**
 
@@ -115,10 +115,10 @@ The listTables operation retrieves all available tables in the specified dataset
 ```
 
 **Properties**
-* datasetId: Dataset ID of the tables to list.
-* pageToken: Page token, returned by a previous call, to request the next page of results.
-* projectId: Project ID of the tables to list.
-* maxResults: Maximum number of results to return.
+* datasetId: The dataset ID of the tables that should be listed.
+* pageToken: The page token (which is returned by a previous call) for requesting the next page of results.
+* projectId: The project ID of the tables that should be listed.
+* maxResults: The maximum number of results to return.
 
 **Sample request**
 
@@ -189,9 +189,9 @@ https://cloud.google.com/bigquery/docs/reference/v2/tables/list
 
 ### Sample configuration
 
-Following example illustrates how to connect to BigQuery with the init operation and getTable operation.
+Follow the steps given below to connect to BigQuery with the init and getTable operations.
 
-1. Create a sample proxy as below :
+1. Create a sample proxy service as follows:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -245,7 +245,7 @@ Following example illustrates how to connect to BigQuery with the init operation
    <description/>
   </proxy>
 ```
-2. Create an json file named getTable.json and copy the configurations given below to it:
+2. Create a JSON file named getTable.json and add the configurations given below:
 
 ```json
 {
@@ -276,7 +276,7 @@ Following example illustrates how to connect to BigQuery with the init operation
 ```bash
 curl http://localhost:8280/services/getTable -H "Content-Type: application/json" -d @getTable.json
 ```
-5. BigQuery returns an json response similar to the one shown below:
+5. BigQuery returns a JSON response similar to the one shown below:
  
 ```json
 {
