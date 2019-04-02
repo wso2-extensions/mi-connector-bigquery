@@ -1,11 +1,11 @@
-Product: Integration tests for WSO2 EI Bigquery connector
+Product: Integration tests for the WSO2 EI Bigquery connector
 
-Pre-requisites:
+**Pre-requisites:**
 
  - Maven 3.x
  - Java 1.8
 
-Tested Platform: 
+**Tested Platform:**
 
  - Mac OX 10.12.6
  - WSO2 EI 6.4.0
@@ -21,7 +21,7 @@ Follow the steps given below to set up integration tests.
         ii)  Go to "https://developers.google.com/oauthplayground/".
         iii) Go to **Select & authorize APIs**, select all the available scopes, and authorize the BigQuery API.
         iv)  Select **Exchange authorization code for tokens** and click **Exchange authorization code for token**. You can then get the access token from the **Access token** section. Be sure to note the access token for future use.
-        v)  Go to "https://console.developers.google.com/" and log in with the google account you already created. You can then create a new project using the drop down option in the top menu. Be sure to note the project Id for future use. 
+        v)  Go to "https://console.developers.google.com/" and log in with the google account you already created. You can then create a new project using the drop down option in the top menu. Be sure to note the project ID for future use. 
         vi)  Go to the **API** tab under **APIs & auth** and enable the **BigQuery** API.
         vii) Go to the **Credentials** tab under **APIs & auth**, select **OAuth 2.0 client ID**, and add the credentials. You need to configure the consent screen and then create a client ID for a **Web application**. Be sure to note the redirect uri for future use.
         viii) Note the client ID and client secret for future use.
@@ -32,7 +32,7 @@ Follow the steps given below to set up integration tests.
        https://www.googleapis.com/oauth2/v3/token.
 
 
- 3. Update the Bigquery properties file (stored in the <BIGQUERY_CONNECTOR_HOME>/src/test/resources/artifacts/ESB/connector/config/ directory and the <BIGQUERY_CONNECTOR_HOME>/repository/ directory as follows:
+ 3. Update the Bigquery properties file (stored in the <BIGQUERY_CONNECTOR_HOME>/src/test/resources/artifacts/ESB/connector/config/ directory and the <BIGQUERY_CONNECTOR_HOME>/repository/ directory) as follows:
 
         i)   apiUrl             -  The API URL of Bigquery(e.g. https://www.googleapis.com).
         ii)  projectId          -  A valid project ID.
