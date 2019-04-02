@@ -21,13 +21,13 @@ Follow the steps given below to set up integration tests.
         ii)  Go to "https://developers.google.com/oauthplayground/".
         iii) Go to **Select & authorize APIs**, select all the available scopes, and authorize the BigQuery API.
         iv)  Select **Exchange authorization code for tokens** and click **Exchange authorization code for token**. You can then get the access token from the **Access token** section. Be sure to note the access token for future use.
-        v)  Go to "https://console.developers.google.com/" and log in with the google account you already created. You can then create a new project using the drop down option in the top menu. Be sure to note the project ID for future use. 
+        v)   Go to "https://console.developers.google.com/" and log in with the google account you already created. You can then create a new project using the drop down option in the top menu. Be sure to note the project ID for future use. 
         vi)  Go to the **API** tab under **APIs & auth** and enable the **BigQuery** API.
-        vii) Go to the **Credentials** tab under **APIs & auth**, select **OAuth 2.0 client ID**, and add the credentials. You need to configure the consent screen and then create a client ID for a **Web application**. Be sure to note the redirect uri for future use.
-        viii) Note the client ID and client secret for future use.
-        ix) Get the authorization code by sending a GET request to the following URL (replace the <redirect_uri> and <client_ID> with the redirect uri and client ID values noted in the previous steps): https://accounts.google.com/o/oauth2/auth?redirect_uri=<redirect_uri>&response_type=code&client_id=<client_ID>&scope=https://www.googleapis.com/auth/bigquery&approval_prompt=force&access_type=offline.
-      Note the authorization code for future use.
-        x)   Get the access token and refresh token by sending a POST request to the URL given below. Be sure to use an x-www-form-urlencoded body with the <code>, <client_id>, <client_secret>, and <redirect_uri> values noted before, and also set the grant_type to **authorization_code**. Note the access token and refresh token for future use. https://www.googleapis.com/oauth2/v3/token.
+        vii) Go to the **Credentials** tab under **APIs & auth**, select **OAuth 2.0 client ID**, and add the credentials. 
+        viii)You need to configure the consent screen and then create a client ID for a **Web application**. Be sure to note the redirect uri for future use. Note the client ID and client secret for future use.
+        ix)  Get the authorization code by sending a GET request to the following URL (replace the <redirect_uri> and <client_ID> with the redirect uri and client ID values noted in the previous steps): https://accounts.google.com/o/oauth2/auth?redirect_uri=<redirect_uri>&response_type=code&client_id=<client_ID>&scope=https://www.googleapis.com/auth/bigquery&approval_prompt=force&access_type=offline.Note the authorization code for future use.
+         x)  Get the access token and refresh token by sending a POST request to the URL given below. Be sure to use an x-www-form-urlencoded body with the <authorization_code>, <client_id>, <client_secret>, and <redirect_uri> values noted before, and also set the grant_type to **authorization_code**. Note the access token and refresh token for future use. 
+              https://www.googleapis.com/oauth2/v3/token.
  
  3. Update the Bigquery properties file (stored in the <BIGQUERY_CONNECTOR_HOME>/src/test/resources/artifacts/ESB/connector/config/ directory and the <BIGQUERY_CONNECTOR_HOME>/repository/ directory) as follows:
 
