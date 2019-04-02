@@ -19,7 +19,7 @@ The runQuery operation runs an SQL query (BigQuery) and returns results if the q
 ```
 
 **Properties**
-* useQueryCache: Specifies whether to look for the result in the query cache. The default value is true.
+* useQueryCache: Specifies whether to look for the result in the query cache. The default value is **true**.
 * timeoutMs: Specifies how long (in milliseconds) the system should wait for the query to complete before expiring and returning the request. 
 * query: A query string (required) that complies with the BigQuery query syntax.
 * dryRun: If set to **true**, BigQuery does not run the job. Instead, if the query is valid, BigQuery returns statistics about the job. If the query is invalid, an error returns. The default value is **false**.
