@@ -10,7 +10,7 @@
    2. Go to "https://developers.google.com/oauthplayground/".
    3. Select all the scopes available under **Select & authorize APIs** to authorize the BigQuery API.
    4. Select **Exchange authorization code for tokens** and click **Exchange authorization code for token**. You can then get the access token from the **Access token** section. Be sure to note the access token for future use.
-   5. Go to "https://console.developers.google.com/" and log in with the google account you already created. You can then create a new project using the drop down option in the top menu. Be sure to note the project Id for future use. 
+   5. Go to "https://console.developers.google.com/" and log in with the google account you already created. You can then create a new project using the drop down option in the top menu. Be sure to note the project ID for future use. 
    6. Go to the **API** tab under **APIs & auth** and enable the **BigQuery** API.
    7. Go to the **Credentials** tab under **APIs & auth**, select **OAuth 2.0 client ID**, and add the credentials. You need to configure the consent screen and then create a client ID for a **Web application**. Be sure to note the redirect uri for future use.
    8. Note the client ID and client secret for future use.
