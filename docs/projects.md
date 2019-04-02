@@ -77,7 +77,7 @@ https://cloud.google.com/bigquery/docs/reference/v2/projects/list
 
 Follow the steps given below to connect to BigQuery with the init and listProjects operations.
 
-1. Create a sample proxy as follows:
+1. Create a sample proxy service as follows:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
