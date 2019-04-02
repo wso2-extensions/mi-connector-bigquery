@@ -27,9 +27,8 @@ Follow the steps given below to set up integration tests.
         viii) Note the client ID and client secret for future use.
         ix) Get the authorization code by sending a GET request to the following URL (replace the <redirect_uri> and <client_ID> with the redirect uri and client ID values noted in the previous steps): https://accounts.google.com/o/oauth2/auth?redirect_uri=<redirect_uri>&response_type=code&client_id=<client_ID>&scope=https://www.googleapis.com/auth/bigquery&approval_prompt=force&access_type=offline.
       Note the authorization code for future use.
-        x)   Get the access token and refresh token by sending a POST request to the URL given below. Be sure to use an x-www-form-urlencoded body with the <code>, <client_id>, <client_secret>, and <redirect_uri> values noted before, and also set the grant_type to **authorization_code**. Note the access token and refresh token for future use.
-https://www.googleapis.com/oauth2/v3/token.
-
+        x)   Get the access token and refresh token by sending a POST request to the URL given below. Be sure to use an x-www-form-urlencoded body with the <code>, <client_id>, <client_secret>, and <redirect_uri> values noted before, and also set the grant_type to **authorization_code**. Note the access token and refresh token for future use. https://www.googleapis.com/oauth2/v3/token.
+ 
  3. Update the Bigquery properties file (stored in the <BIGQUERY_CONNECTOR_HOME>/src/test/resources/artifacts/ESB/connector/config/ directory and the <BIGQUERY_CONNECTOR_HOME>/repository/ directory) as follows:
 
         i)   apiUrl             -  The API URL of Bigquery(e.g. https://www.googleapis.com).
