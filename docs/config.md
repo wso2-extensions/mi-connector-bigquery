@@ -1,4 +1,4 @@
-# Configuring BigQuery operations
+# Configuring BigQuery Operations
 
 [[Prerequisites]](#Prerequisites) [[Initializing the Connector]](#initializing-the-connector)
 
@@ -155,9 +155,9 @@ https://developers.google.com/identity/protocols/OAuth2WebServer
 ```
 **Properties** 
 * apiUrl: The base endpoint URL of the BigQuery API.
-* clientId:  Client Id for the BigQuery API.
-* clientSecret: Client secret for the BigQuery API.
-* refreshToken: RefreshToken token for the BigQuery API.
+* clientId:  The client ID for the BigQuery API.
+* clientSecret: The client secret for the BigQuery API.
+* refreshToken: The refresh token for the BigQuery API.
 
 **Sample request**
 
