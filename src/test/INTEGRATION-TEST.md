@@ -7,13 +7,13 @@ Product: Integration tests for the WSO2 EI Bigquery connector
 
 **Tested Platform:**
 
- - Mac OX 10.12.6
- - WSO2 EI 6.4.0
+ - Ubuntu 16.04
+ - WSO2 EI 6.5.0
  - Java 1.8
 
 Follow the steps given below to set up integration tests.
 
- 1. Download WSO2 EI 6.4.0 zip file from the official site and place it in the "{BIGQUERY_CONNECTOR_HOME}/repository/" folder.
+ 1. Download WSO2 EI 6.5.0 zip file from the official site and place it in the "{BIGQUERY_CONNECTOR_HOME}/repository/" folder.
 
  2. Set authorization details:
  

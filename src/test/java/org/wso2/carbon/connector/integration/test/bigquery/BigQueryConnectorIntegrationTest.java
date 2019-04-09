@@ -142,8 +142,8 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("message"), apiRestResponse
                 .getBody().getJSONObject("error").getString("message"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("code"), apiRestResponse.getBody()
-                .getJSONObject("error").getString("code"));
+        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getInt("code"), apiRestResponse.getBody()
+                .getJSONObject("error").getInt("code"));
     }
 
     /**
@@ -206,8 +206,8 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("message"), apiRestResponse
                 .getBody().getJSONObject("error").getString("message"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("code"), apiRestResponse.getBody()
-                .getJSONObject("error").getString("code"));
+        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getInt("code"), apiRestResponse.getBody()
+                .getJSONObject("error").getInt("code"));
     }
 
     /**
@@ -270,8 +270,8 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("message"), apiRestResponse
                 .getBody().getJSONObject("error").getString("message"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("code"), apiRestResponse.getBody()
-                .getJSONObject("error").getString("code"));
+        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getInt("code"), apiRestResponse.getBody()
+                .getJSONObject("error").getInt("code"));
     }
 
     /**
@@ -338,8 +338,8 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("message"), apiRestResponse
                 .getBody().getJSONObject("error").getString("message"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("code"), apiRestResponse.getBody()
-                .getJSONObject("error").getString("code"));
+        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getInt("code"), apiRestResponse.getBody()
+                .getJSONObject("error").getInt("code"));
     }
 
     /**
@@ -443,8 +443,8 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
                 .getJSONObject(0).getString("message"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("message"), apiRestResponse
                 .getBody().getJSONObject("error").getString("message"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("code"), apiRestResponse.getBody()
-                .getJSONObject("error").getString("code"));
+        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getInt("code"), apiRestResponse.getBody()
+                .getJSONObject("error").getInt("code"));
 
     }
 
@@ -466,7 +466,7 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndpoint, "GET", apiRequestHeadersMap);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 200);
         Assert.assertEquals(esbRestResponse.getBody().getString("etag"), apiRestResponse.getBody().getString("etag"));
-        Assert.assertEquals(esbRestResponse.getBody().getString("totalItems"), apiRestResponse.getBody().getString(
+        Assert.assertEquals(esbRestResponse.getBody().getInt("totalItems"), apiRestResponse.getBody().getInt(
                 "totalItems"));
         Assert.assertEquals(esbRestResponse.getBody().getString("kind"), apiRestResponse.getBody().getString("kind"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONArray("tables").getJSONObject(0).getString("id"),
@@ -498,7 +498,7 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
         RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndpoint, "GET", apiRequestHeadersMap);
         Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 200);
         Assert.assertEquals(esbRestResponse.getBody().getString("etag"), apiRestResponse.getBody().getString("etag"));
-        Assert.assertEquals(esbRestResponse.getBody().getString("totalItems"), apiRestResponse.getBody().getString(
+        Assert.assertEquals(esbRestResponse.getBody().getInt("totalItems"), apiRestResponse.getBody().getInt(
                 "totalItems"));
         Assert.assertEquals(esbRestResponse.getBody().getString("kind"), apiRestResponse.getBody().getString("kind"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONArray("tables").getJSONObject(0).getString("id"),
@@ -536,8 +536,8 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
                 .getJSONObject(0).getString("message"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("message"), apiRestResponse
                 .getBody().getJSONObject("error").getString("message"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("code"), apiRestResponse.getBody()
-                .getJSONObject("error").getString("code"));
+        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getInt("code"), apiRestResponse.getBody()
+                .getJSONObject("error").getInt("code"));
 
     }
 
@@ -639,8 +639,8 @@ public class BigQueryConnectorIntegrationTest extends ConnectorIntegrationTestBa
                 .getJSONObject(0).getString("message"));
         Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("message"), apiRestResponse
                 .getBody().getJSONObject("error").getString("message"));
-        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getString("code"), apiRestResponse.getBody()
-                .getJSONObject("error").getString("code"));
+        Assert.assertEquals(esbRestResponse.getBody().getJSONObject("error").getInt("code"), apiRestResponse.getBody()
+                .getJSONObject("error").getInt("code"));
 
     }
 }

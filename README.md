@@ -1,12 +1,13 @@
 # BigQuery WSO2 EI Connector
 
-The BigQuery [connector](https://docs.wso2.com/display/EI640/Working+with+Connectors) allows you to access the [BigQuery REST API](https://cloud.google.com/bigquery/docs/reference/rest/v2/) through WSO2 ESB. BigQuery is a tool that allows you to execute SQL-like queries on large amounts of data at an outstanding speed.
+The BigQuery [connector](https://docs.wso2.com/display/EI650/Working+with+Connectors) allows you to access the [BigQuery REST API](https://cloud.google.com/bigquery/docs/reference/rest/v2/) through WSO2 ESB. BigQuery is a tool that allows you to execute SQL-like queries on large amounts of data at an outstanding speed.
 
 
 ## Compatibility
 
 | Connector version | Supported BigQuery API version | Supported WSO2 ESB/EI version |
 | ------------- | ---------------|------------- |
+| [1.0.9](https://github.com/wso2-extensions/esb-connector-bigquery/tree/org.wso2.carbon.connector.bigquery-1.0.9) | v2 | EI 6.5.0    |
 | [1.0.8](https://github.com/wso2-extensions/esb-connector-bigquery/tree/org.wso2.carbon.connector.bigquery-1.0.8) | v2 | EI 6.4.0    |
 | [1.0.7](https://github.com/wso2-extensions/esb-connector-bigquery/tree/org.wso2.carbon.connector.bigquery-1.0.7) | v2 | ESB 4.9.0, ESB 5.0.0, EI 6.1.1, EI 6.3.0, EI 6.4.0    |
 
@@ -15,9 +16,9 @@ The BigQuery [connector](https://docs.wso2.com/display/EI640/Working+with+Connec
 #### Download and install the connector
 
 1. Download the connector from the [WSO2 Store](https://store.wso2.com/store/assets/esbconnector/details/3fcaf309-1a69-4edf-870a-882bb76fdaa1) by clicking the **Download Connector** button.
-2. You can then follow this [documentation](https://docs.wso2.com/display/EI640/Working+with+Connectors+via+the+Management+Console) to add the connector to your WSO2 EI instance and to enable it (via the management console).
-3. For more information on using connectors and their operations in your WSO2 EI configurations, see [Using a Connector](https://docs.wso2.com/display/EI640/Using+a+Connector).
-4. If you want to work with connectors via WSO2 EI Tooling, see [Working with Connectors via Tooling](https://docs.wso2.com/display/EI640/Working+with+Connectors+via+Tooling).
+2. You can then follow this [documentation](https://docs.wso2.com/display/EI650/Working+with+Connectors+via+the+Management+Console) to add the connector to your WSO2 EI instance and to enable it (via the management console).
+3. For more information on using connectors and their operations in your WSO2 EI configurations, see [Using a Connector](https://docs.wso2.com/display/EI650/Using+a+Connector).
+4. If you want to work with connectors via WSO2 EI Tooling, see [Working with Connectors via Tooling](https://docs.wso2.com/display/EI650/Working+with+Connectors+via+Tooling).
 
 #### Configuring the connector operations
 
