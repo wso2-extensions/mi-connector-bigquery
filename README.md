@@ -21,7 +21,7 @@ The BigQuery [connector](https://docs.wso2.com/display/EI640/Working+with+Connec
 
 #### Configuring the connector operations
 
-To get started with the **BigQuery** connector and their operations, see [Configuring BigQuery Operations](docs/config.md).
+To get started with the **BigQuery** connector and its operations, see [Configuring BigQuery Operations](docs/config.md).
 
 ## Building from the source
 
