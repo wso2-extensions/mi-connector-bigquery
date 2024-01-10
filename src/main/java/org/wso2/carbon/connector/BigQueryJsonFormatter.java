@@ -58,11 +58,11 @@ public class BigQueryJsonFormatter extends AbstractConnector {
                 if (jsonString.startsWith(JSON_ARRAY_START_CHAR)) {
                     JSONArray jsonArray = new JSONArray(jsonString);
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject rowdata = constructDataRow(jsonArray.getJSONObject(i).toString());
-                        finalDataArray.put(rowdata);
+                        //JSONObject rowdata = constructDataRow(jsonArray.getJSONObject(i).toString());
+                        finalDataArray.put(jsonArray.get(i));
                     }
                 } else {
-                    JSONObject rowdata = constructDataRow(jsonString);
+                    JSONObject rowdata = new JSONObject(jsonString);
                     finalDataArray.put(rowdata);
                 }
                 return finalDataArray.toString().replace("\\\\", "");
