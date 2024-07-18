@@ -65,7 +65,7 @@ public class BigQueryJsonFormatter extends AbstractConnector {
                     JSONObject rowdata = new JSONObject(jsonString);
                     finalDataArray.put(rowdata);
                 }
-                return finalDataArray.toString().replace("\\\\", "");
+                return finalDataArray.toString();
             } catch (Exception e) {
                 throw new SynapseException("Error while formatting the json", e);
             }
