@@ -26,5 +26,6 @@
         <dependency component="bigquery-tables"/>
         <description>WSO2 ESB Connector Library for BigQuery API.</description>
     </component>
+    <displayName>Google BigQuery</displayName>
     <icon>icon/icon-small.gif</icon>
 </connector>
