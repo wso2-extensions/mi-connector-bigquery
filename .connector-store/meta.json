@@ -85,12 +85,7 @@
                     "isHidden":false
                 }
             ],
-            "connections": [
-                {
-                    "name": "bigquery",
-                    "description": "Connection for querying Google BigQuery."
-                }
-            ],
+            "connections": [],
             "isHidden": false
         },
         {
@@ -163,12 +158,7 @@
                     "isHidden":false
                 }
             ],
-            "connections": [
-                {
-                    "name": "bigquery",
-                    "description": "Connection for querying Google BigQuery."
-                }
-            ],
+            "connections": [],
             "isHidden": false
         }
     ]
