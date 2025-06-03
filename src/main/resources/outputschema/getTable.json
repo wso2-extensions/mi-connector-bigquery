@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "payload": {
+      "description": "The response from getting a BigQuery table",
+      "properties": {
+        "kind": {
+          "description": "The resource type. Value: bigquery#table",
+          "type": "string"
+        },
+        "etag": {
+          "description": "A hash of the resource",
+          "type": "string"
+        },
+        "id": {
+          "description": "The fully-qualified unique name of the table",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "A URL that can be used to access the resource again",
+          "type": "string"
+        },
+        "tableReference": {
+          "description": "A unique reference to the table",
+          "properties": {
+            "projectId": {
+              "description": "The ID of the project",
+              "type": "string"
+            },
+            "datasetId": {
+              "description": "The ID of the dataset",
+              "type": "string"
+            },
+            "tableId": {
+              "description": "The ID of the table",
+              "type": "string"
+            }
+          }
+        },
+        "friendlyName": {
+          "description": "A descriptive name for the table",
+          "type": "string"
+        },
+        "description": {
+          "description": "A user-friendly description of the table",
+          "type": "string"
+        },
+        "labels": {
+          "description": "The labels associated with this table",
+          "type": "object"
+        },
+        "schema": {
+          "description": "Describes the schema of the table",
+          "properties": {
+            "fields": {
+              "description": "Describes the fields in a table",
+              "type": "array",
+              "items": {
+                "properties": {
+                  "name": {
+                    "description": "The field name",
+                    "type": "string"
+                  },
+                  "type": {
+                    "description": "The field data type",
+                    "type": "string"
+                  },
+                  "mode": {
+                    "description": "The field mode",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "The field description",
+                    "type": "string"
+                  },
+                  "fields": {
+                    "description": "Describes the nested schema fields if the type property is set to RECORD",
+                    "type": "array"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "numBytes": {
+          "description": "The size of this table in bytes",
+          "type": "string"
+        },
+        "numLongTermBytes": {
+          "description": "The number of bytes in the table that are considered 'long-term storage'",
+          "type": "string"
+        },
+        "numRows": {
+          "description": "The number of rows of data in this table",
+          "type": "string"
+        },
+        "creationTime": {
+          "description": "The time when this table was created, in milliseconds since the epoch",
+          "type": "string"
+        },
+        "expirationTime": {
+          "description": "The time when this table expires, in milliseconds since the epoch",
+          "type": "string"
+        },
+        "lastModifiedTime": {
+          "description": "The time when this table was last modified, in milliseconds since the epoch",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of table",
+          "type": "string"
+        },
+        "view": {
+          "description": "The view definition",
+          "properties": {
+            "query": {
+              "description": "A query that BigQuery executes when the view is referenced",
+              "type": "string"
+            },
+            "useLegacySql": {
+              "description": "Specifies whether to use BigQuery's legacy SQL for this view",
+              "type": "boolean"
+            }
+          }
+        },
+        "location": {
+          "description": "The geographic location where the table resides",
+          "type": "string"
+        }
+      }
+    },
+    "attributes": {
+      "description": "Metadata about the operation",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP status code of the API response",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

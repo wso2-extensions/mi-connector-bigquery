@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "payload": {
+      "description": "The response from listing BigQuery tables",
+      "properties": {
+        "kind": {
+          "description": "The resource type. Value: bigquery#tableList",
+          "type": "string"
+        },
+        "etag": {
+          "description": "A hash of the page of results",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "A token to request the next page of results",
+          "type": "string"
+        },
+        "tables": {
+          "description": "List of tables in the dataset",
+          "type": "array",
+          "items": {
+            "properties": {
+              "kind": {
+                "description": "The resource type. Value: bigquery#table",
+                "type": "string"
+              },
+              "id": {
+                "description": "The fully-qualified unique name of the table",
+                "type": "string"
+              },
+              "tableReference": {
+                "description": "A unique reference to the table",
+                "properties": {
+                  "projectId": {
+                    "description": "The ID of the project",
+                    "type": "string"
+                  },
+                  "datasetId": {
+                    "description": "The ID of the dataset",
+                    "type": "string"
+                  },
+                  "tableId": {
+                    "description": "The ID of the table",
+                    "type": "string"
+                  }
+                }
+              },
+              "type": {
+                "description": "The type of table",
+                "type": "string"
+              },
+              "view": {
+                "description": "The view definition",
+                "properties": {
+                  "query": {
+                    "description": "A query that BigQuery executes when the view is referenced",
+                    "type": "string"
+                  }
+                }
+              },
+              "creationTime": {
+                "description": "The time when this table was created, in milliseconds since the epoch",
+                "type": "string"
+              },
+              "expirationTime": {
+                "description": "The time when this table expires, in milliseconds since the epoch",
+                "type": "string"
+              },
+              "friendlyName": {
+                "description": "A descriptive name for the table",
+                "type": "string"
+              },
+              "labels": {
+                "description": "The labels associated with this table",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "totalItems": {
+          "description": "The total number of tables in the collection",
+          "type": "integer"
+        }
+      }
+    },
+    "attributes": {
+      "description": "Metadata about the operation",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP status code of the API response",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

@@ -21,6 +21,8 @@
     <parameter name="datasetId" description="Dataset ID of the requested table."/>
     <parameter name="projectId" description="Project ID of the requested table."/>
     <parameter name="tableId" description="Table ID of the requested table."/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
         <property name="uri.var.datasetId" expression="$func:datasetId"/>
         <property name="uri.var.projectId" expression="$func:projectId"/>

@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "payload": {
+      "description": "The response from getting a BigQuery dataset",
+      "properties": {
+        "kind": {
+          "description": "The resource type. Value: bigquery#dataset",
+          "type": "string"
+        },
+        "etag": {
+          "description": "A hash of the resource",
+          "type": "string"
+        },
+        "id": {
+          "description": "The fully-qualified unique name of the dataset",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "A URL that can be used to access the resource again",
+          "type": "string"
+        },
+        "datasetReference": {
+          "description": "A unique reference to the dataset",
+          "properties": {
+            "datasetId": {
+              "description": "The ID of the dataset",
+              "type": "string"
+            },
+            "projectId": {
+              "description": "The ID of the project",
+              "type": "string"
+            }
+          }
+        },
+        "friendlyName": {
+          "description": "A descriptive name for the dataset",
+          "type": "string"
+        },
+        "description": {
+          "description": "A user-friendly description of the dataset",
+          "type": "string"
+        },
+        "defaultTableExpirationMs": {
+          "description": "The default table expiration time in milliseconds",
+          "type": "string"
+        },
+        "defaultPartitionExpirationMs": {
+          "description": "The default partition expiration time in milliseconds",
+          "type": "string"
+        },
+        "labels": {
+          "description": "The labels associated with this dataset",
+          "type": "object"
+        },
+        "access": {
+          "description": "An array of access entries",
+          "type": "array",
+          "items": {
+            "properties": {
+              "role": {
+                "description": "The role granted to the entity",
+                "type": "string"
+              },
+              "userByEmail": {
+                "description": "An email address of a user to grant access to",
+                "type": "string"
+              },
+              "groupByEmail": {
+                "description": "An email address of a Google Group to grant access to",
+                "type": "string"
+              },
+              "specialGroup": {
+                "description": "A special group to grant access to",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "creationTime": {
+          "description": "The time when this dataset was created, in milliseconds since the epoch",
+          "type": "string"
+        },
+        "lastModifiedTime": {
+          "description": "The date when this dataset was last modified, in milliseconds since the epoch",
+          "type": "string"
+        },
+        "location": {
+          "description": "The geographic location where the dataset resides",
+          "type": "string"
+        }
+      }
+    },
+    "attributes": {
+      "description": "Metadata about the operation",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP status code of the API response",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

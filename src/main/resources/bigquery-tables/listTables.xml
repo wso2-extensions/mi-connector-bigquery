@@ -23,6 +23,8 @@
     <parameter name="maxResults" description="Maximum number of results to return."/>
     <parameter name="pageToken"
                description="Page token, returned by a previous call, to request the next page of results."/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
         <property name="uri.var.datasetId" expression="$func:datasetId"/>
         <property name="uri.var.projectId" expression="$func:projectId"/>

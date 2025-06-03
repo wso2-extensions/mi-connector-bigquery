@@ -25,6 +25,8 @@
     <parameter name="maxResults" description="The max results per page."/>
     <parameter name="pageToken" description="The page token value."/>
     <parameter name="startIndex" description="Zero-based index of the starting row to read."/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
         <property name="uri.var.datasetId" expression="$func:datasetId"/>
         <property name="uri.var.projectId" expression="$func:projectId"/>
@@ -61,7 +63,7 @@
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="{+uri.var.apiUrl}/bigquery/v2/projects/{+uri.var.projectId}/datasets/{+uri.var.datasetId}/tables/{+uri.var.tableId}/data{+uri.var.urlQuery}"/>
+                      uri-template="{+uri.var.apiUrl}projects/{+uri.var.projectId}/datasets/{+uri.var.datasetId}/tables/{+uri.var.tableId}/data{+uri.var.urlQuery}"/>
             </endpoint>
         </call>
         <!-- Remove custom Headers from the API Response -->

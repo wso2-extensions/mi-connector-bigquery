@@ -1,0 +1,195 @@
+{
+  "connectorName": "googlebigquery",
+  "operationName": "runQuery",
+  "title": "Run Query",
+  "help": "<h1>Run Query</h1><b>Executes a BigQuery SQL query and returns the results.</b><br><br>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "GOOGLEBIGQUERY"
+              ],
+              "defaultType": "connection.GOOGLEBIGQUERY",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Project Configuration",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "projectId",
+              "displayName": "Project ID",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "Project ID of the project billed for the query"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Query",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "query",
+              "displayName": "Query",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "A query string, following the BigQuery query syntax, of the query to execute"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Query Configuration",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "defaultDatasetId",
+              "displayName": "Default Dataset ID",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "defaultProjectId",
+              "displayName": "Default Project ID",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "The ID of the project containing this dataset"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "useLegacySql",
+              "displayName": "Use Legacy SQL",
+              "inputType": "checkbox",
+              "defaultValue": "true",
+              "required": "false",
+              "helpTip": "Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's standard SQL"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Query Options",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "maxResults",
+              "displayName": "Max Results",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "The maximum number of rows of data to return per page of results. Responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "timeoutMs",
+              "displayName": "Timeout (ms)",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "How long to wait for the query to complete, in milliseconds, before the request times out and returns"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "dryRun",
+              "displayName": "Dry Run",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "required": "false",
+              "helpTip": "If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job. If the query is invalid, an error returns. The default value is false"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "useQueryCache",
+              "displayName": "Use Query Cache",
+              "inputType": "checkbox",
+              "defaultValue": "true",
+              "required": "false",
+              "helpTip": "Whether to look for the result in the query cache. The default value is true"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "kind",
+              "displayName": "Kind",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "The resource type of the request"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

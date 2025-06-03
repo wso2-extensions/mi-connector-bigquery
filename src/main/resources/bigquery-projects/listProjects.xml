@@ -20,6 +20,8 @@
 <template name="listProjects" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="maxResults" description="The max results per page."/>
     <parameter name="pageToken" description="The page token value."/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
         <property name="uri.var.maxResults" expression="$func:maxResults"/>
         <property name="uri.var.pageToken" expression="$func:pageToken"/>
@@ -48,7 +50,7 @@
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="{+uri.var.apiUrl}/bigquery/v2/projects{+uri.var.urlQuery}"/>
+                      uri-template="{+uri.var.apiUrl}projects{+uri.var.urlQuery}"/>
             </endpoint>
         </call>
         <!-- Remove custom Headers from the API Response -->

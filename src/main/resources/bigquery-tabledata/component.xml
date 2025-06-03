@@ -16,15 +16,17 @@
  ~  specific language governing permissions and limitations
  ~  under the License.
 -->
-<component name="bigquery-tabledata" type="synapse/template">
+<component name="bigquery-tabledata" type="synapse/template"  displayName="BigQuery Table Data">
     <subComponents>
         <component name="listTabledata">
             <file>listTabledata.xml</file>
             <description>List available tabledata.</description>
+            <displayName>List Table Data</displayName>
         </component>
         <component name="insertAllTableData">
             <file>insertAllTableData.xml</file>
             <description>Insert tabledata into a table.</description>
+            <displayName>Insert All Table Data</displayName>
         </component>
     </subComponents>
 </component>

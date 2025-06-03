@@ -21,6 +21,8 @@
     <parameter name="projectId"
                description="The Id of the project which the dataset is belongs to."/>
     <parameter name="datasetId" description="The Id of the dataset."/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
         <property name="uri.var.projectId" expression="$func:projectId"/>
         <property name="uri.var.datasetId" expression="$func:datasetId"/>
@@ -31,7 +33,7 @@
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="{+uri.var.apiUrl}/bigquery/v2/projects/{+uri.var.projectId}/datasets/{+uri.var.datasetId}{+uri.var.urlQuery}"/>
+                      uri-template="{+uri.var.apiUrl}projects/{+uri.var.projectId}/datasets/{+uri.var.datasetId}{+uri.var.urlQuery}"/>
             </endpoint>
         </call>
         <!-- Remove custom Headers from the API Response -->

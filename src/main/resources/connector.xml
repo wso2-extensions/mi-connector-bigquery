@@ -17,14 +17,14 @@
  ~  under the License.
 -->
 <connector>
-    <component name="bigquery" package="org.wso2.carbon.connector">
+    <component name="googlebigquery" package="org.wso2.carbon.connector">
         <dependency component="bigquery-config"/>
         <dependency component="bigquery-datasets"/>
         <dependency component="bigquery-jobs"/>
         <dependency component="bigquery-projects"/>
         <dependency component="bigquery-tabledata"/>
         <dependency component="bigquery-tables"/>
-        <description>WSO2 ESB Connector Library for BigQuery API.</description>
+        <description>WSO2 MI Connector for BigQuery API.</description>
     </component>
     <displayName>Google BigQuery</displayName>
     <icon>icon/icon-small.gif</icon>

@@ -16,15 +16,17 @@
  ~  specific language governing permissions and limitations
  ~  under the License.
 -->
-<component name="bigquery-datasets" type="synapse/template">
+<component name="bigquery-datasets" type="synapse/template"  displayName="BigQuery Datasets">
     <subComponents>
         <component name="getDataset">
             <file>getDataset.xml</file>
             <description>Gets the specified dataset by dataset ID.</description>
+            <displayName>Get Dataset</displayName>
         </component>
         <component name="listDatasets">
             <file>listDatasets.xml</file>
             <description>List datasets of a project.</description>
+            <displayName>List Datasets</displayName>
         </component>
     </subComponents>
 </component>

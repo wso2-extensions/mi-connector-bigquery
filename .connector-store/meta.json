@@ -16,6 +16,56 @@
     ],
     "releases": [
         {
+            "tagName": "v2.0.0",
+            "products": [
+                "MI 4.4.0"
+            ],
+            "operations": [
+                {
+                    "name": "getDataset",
+                    "description": "Gets the specified dataset by dataset ID.",
+                    "isHidden": false
+                },
+                {
+                    "name": "listDatasets",
+                    "description": "List datasets of a project.",
+                    "isHidden": false
+                },
+                {
+                    "name": "runQuery",
+                    "description": "Execute query.",
+                    "isHidden": false
+                },
+                {
+                    "name": "listProjects",
+                    "description": "List projects.",
+                    "isHidden": false
+                },
+                {
+                    "name": "listTabledata",
+                    "description": "List available tabledata.",
+                    "isHidden": false
+                },
+                {
+                    "name": "insertAllTableData",
+                    "description": "Insert tabledata into a table.",
+                    "isHidden": false
+                },
+                {
+                    "name": "getTable",
+                    "description": "Gets the specified table by table ID.",
+                    "isHidden": false
+                },
+                {
+                    "name": "listTables",
+                    "description": "List tables.",
+                    "isHidden": false
+                }
+            ],
+            "connections": ["GOOGLEBIGQUERY"],
+            "isHidden": false
+        },
+        {
             "tagName": "v1.0.11",
             "products": [
                 "MI 4.4.0",

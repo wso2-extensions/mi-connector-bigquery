@@ -16,11 +16,12 @@
  ~  specific language governing permissions and limitations
  ~  under the License.
 -->
-<component name="bigquery-jobs" type="synapse/template">
+<component name="bigquery-jobs" type="synapse/template"  displayName="BigQuery Jobs">
     <subComponents>
         <component name="runQuery">
             <file>runQuery.xml</file>
             <description>Execute query.</description>
+            <displayName>Run Query</displayName>
         </component>
     </subComponents>
 </component>

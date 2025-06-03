@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "payload": {
+      "description": "The response from inserting data into a BigQuery table",
+      "properties": {
+        "kind": {
+          "description": "The resource type. Value: bigquery#tableDataInsertAllResponse",
+          "type": "string"
+        },
+        "insertErrors": {
+          "description": "An array of errors for rows that were not inserted",
+          "type": "array",
+          "items": {
+            "properties": {
+              "index": {
+                "description": "The index of the row that error applies to",
+                "type": "integer"
+              },
+              "errors": {
+                "description": "Error information for the row indicated by the index property",
+                "type": "array",
+                "items": {
+                  "properties": {
+                    "reason": {
+                      "description": "A short error code that summarizes the error",
+                      "type": "string"
+                    },
+                    "location": {
+                      "description": "Specifies where the error occurred, if present",
+                      "type": "string"
+                    },
+                    "debugInfo": {
+                      "description": "Debugging information. This property is internal to Google and should not be used",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "A human-readable description of the error",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "attributes": {
+      "description": "Metadata about the operation",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP status code of the API response",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
