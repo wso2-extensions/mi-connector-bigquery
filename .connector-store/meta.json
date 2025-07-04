@@ -22,48 +22,546 @@
             ],
             "operations": [
                 {
-                    "name": "getDataset",
-                    "description": "Gets the specified dataset by dataset ID.",
-                    "isHidden": false
-                },
-                {
-                    "name": "listDatasets",
-                    "description": "List datasets of a project.",
-                    "isHidden": false
-                },
-                {
                     "name": "runQuery",
-                    "description": "Execute query.",
-                    "isHidden": false
-                },
-                {
-                    "name": "listProjects",
-                    "description": "List projects.",
-                    "isHidden": false
-                },
-                {
-                    "name": "listTabledata",
-                    "description": "List available tabledata.",
-                    "isHidden": false
-                },
-                {
-                    "name": "insertAllTableData",
-                    "description": "Insert tabledata into a table.",
-                    "isHidden": false
-                },
-                {
-                    "name": "getTable",
-                    "description": "Gets the specified table by table ID.",
+                    "description": "Run Query",
+                    "params": [
+                        {
+                            "name": "projectId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Project ID of the project billed for the query"
+                        },
+                        {
+                            "name": "query",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "A query string, following the BigQuery query syntax, of the query to execute"
+                        },
+                        {
+                            "name": "defaultDatasetId",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters"
+                        },
+                        {
+                            "name": "defaultProjectId",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The ID of the project containing this dataset"
+                        },
+                        {
+                            "name": "useLegacySql",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "true",
+                            "description": "Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's standard SQL"
+                        },
+                        {
+                            "name": "maxResults",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The maximum number of rows of data to return per page of results. Responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies"
+                        },
+                        {
+                            "name": "timeoutMs",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "How long to wait for the query to complete, in milliseconds, before the request times out and returns"
+                        },
+                        {
+                            "name": "dryRun",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "If set to true, BigQuery doesn't run the job. Instead, if the query is valid, BigQuery returns statistics about the job. If the query is invalid, an error returns. The default value is false"
+                        },
+                        {
+                            "name": "useQueryCache",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "true",
+                            "description": "Whether to look for the result in the query cache. The default value is true"
+                        },
+                        {
+                            "name": "kind",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The resource type of the request"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
                     "isHidden": false
                 },
                 {
                     "name": "listTables",
-                    "description": "List tables.",
+                    "description": "List Tables",
+                    "params": [
+                        {
+                            "name": "projectId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Project ID of the tables to list"
+                        },
+                        {
+                            "name": "datasetId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Dataset ID of the tables to list"
+                        },
+                        {
+                            "name": "maxResults",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Maximum number of results to return"
+                        },
+                        {
+                            "name": "pageToken",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Page token, returned by a previous call, to request the next page of results"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "getDataset",
+                    "description": "Get Dataset",
+                    "params": [
+                        {
+                            "name": "projectId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the project which the dataset belongs to"
+                        },
+                        {
+                            "name": "datasetId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the dataset"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "getTable",
+                    "description": "Get Table",
+                    "params": [
+                        {
+                            "name": "projectId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Project ID of the requested table"
+                        },
+                        {
+                            "name": "datasetId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Dataset ID of the requested table"
+                        },
+                        {
+                            "name": "tableId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Table ID of the requested table"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "listTabledata",
+                    "description": "List Table Data",
+                    "params": [
+                        {
+                            "name": "projectId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the project which the dataset belongs to"
+                        },
+                        {
+                            "name": "datasetId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the dataset which the table belongs to"
+                        },
+                        {
+                            "name": "tableId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the table"
+                        },
+                        {
+                            "name": "maxResults",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The maximum number of results per page"
+                        },
+                        {
+                            "name": "pageToken",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The page token value for pagination"
+                        },
+                        {
+                            "name": "startIndex",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Zero-based index of the starting row to read"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "insertAllTableData",
+                    "description": "Insert All Table Data",
+                    "params": [
+                        {
+                            "name": "projectId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the project which the dataset belongs to"
+                        },
+                        {
+                            "name": "datasetId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the dataset which the table belongs to"
+                        },
+                        {
+                            "name": "tableId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the table"
+                        },
+                        {
+                            "name": "jsonPay",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "A JSON object that contains a row of data"
+                        },
+                        {
+                            "name": "skipInvalidRows",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Boolean value to check whether the validation of row"
+                        },
+                        {
+                            "name": "ignoreUnknownValues",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Boolean value to check the validation of the values that match the table schema"
+                        },
+                        {
+                            "name": "templateSuffix",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Instance table template suffix"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "listDatasets",
+                    "description": "List Datasets",
+                    "params": [
+                        {
+                            "name": "projectId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The ID of the project which the datasets belong to"
+                        },
+                        {
+                            "name": "maxResults",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The maximum number of results per page"
+                        },
+                        {
+                            "name": "pageToken",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The page token value for pagination"
+                        },
+                        {
+                            "name": "isAll",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Boolean value to determine whether to list all datasets, including hidden ones"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "listProjects",
+                    "description": "List Projects",
+                    "params": [
+                        {
+                            "name": "maxResults",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The maximum number of results per page"
+                        },
+                        {
+                            "name": "pageToken",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The page token value for pagination"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
                     "isHidden": false
                 }
             ],
-            "connections": ["GOOGLEBIGQUERY"],
-            "isHidden": false
+            "connections": [
+                {
+                    "name": "GOOGLEBIGQUERY",
+                    "description": "Google BigQuery Connector",
+                    "params": [
+                        {
+                            "name": "connectionName",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "GOOGLESBIGQUERY_CONNECTION_1",
+                            "description": "The name for the Google Sheets connection"
+                        },
+                        {
+                            "name": "clientId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Client ID used to connect with Google Sheets"
+                        },
+                        {
+                            "name": "clientSecret",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Client Secret to connect with Google Sheets"
+                        },
+                        {
+                            "name": "refreshToken",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Refresh Token used to connect with Google Sheets"
+                        },
+                        {
+                            "name": "apiUrl",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "https://www.googleapis.com/bigquery/v2/",
+                            "description": "API URL used to connect with Google Sheets"
+                        },
+                        {
+                            "name": "tokenEndpoint",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "https://oauth2.googleapis.com/token",
+                            "description": "Token URL used to connect with Google Sheets"
+                        },
+                        {
+                            "name": "callback",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Name of the JavaScript callback function that handles the response. Used in JavaScript JSON-P requests."
+                        },
+                        {
+                            "name": "registryPath",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Path to the registry where the connection details are stored."
+                        },
+                        {
+                            "name": "prettyPrint",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "true",
+                            "description": "If true, the response will be formatted in a more readable way."
+                        },
+                        {
+                            "name": "quotaUser",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "An alternative to user IP for quota purposes."
+                        },
+                        {
+                            "name": "userIp",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "IP address of the end user for quota purposes."
+                        },
+                        {
+                            "name": "fields",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "List of fields to be returned in the response."
+                        },
+                        {
+                            "name": "ifNoneMatch",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Used for caching purposes. If the content has not changed, the server will return a 304 Not Modified response."
+                        },
+                        {
+                            "name": "ifMatch",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Used for caching purposes. If the content has changed, the server will return a 412 Precondition Failed response."
+                        }
+                    ]
+                }
+            ]
         },
         {
             "tagName": "v1.0.11",
