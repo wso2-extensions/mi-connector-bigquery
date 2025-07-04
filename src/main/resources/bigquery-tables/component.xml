@@ -16,15 +16,17 @@
  ~  specific language governing permissions and limitations
  ~  under the License.
 -->
-<component name="bigquery-tables" type="synapse/template">
+<component name="bigquery-tables" type="synapse/template" displayName="BigQuery Tables">
     <subComponents>
         <component name="getTable">
             <file>getTable.xml</file>
             <description>Gets the specified table by table ID.</description>
+            <displayName>Get Table</displayName>
         </component>
         <component name="listTables">
             <file>listTables.xml</file>
             <description>List tables.</description>
+            <displayName>List Tables</displayName>
         </component>
     </subComponents>
 </component>

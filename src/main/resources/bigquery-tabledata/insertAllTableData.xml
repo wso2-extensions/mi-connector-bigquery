@@ -29,6 +29,8 @@
                description="Boolean value to check the validation of the values that match the table schema"/>
     <parameter name="templateSuffix" description="Instance table"/>
     <parameter name="jsonPay" description="A JSON object that contains a row of data"/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
         <property name="uri.var.datasetId" expression="$func:datasetId"/>
         <property name="uri.var.projectId" expression="$func:projectId"/>
@@ -62,7 +64,7 @@
         <call>
             <endpoint>
                 <http method="Post"
-                      uri-template="{+uri.var.apiUrl}/bigquery/v2/projects/{+uri.var.projectId}/datasets/{+uri.var.datasetId}/tables/{+uri.var.tableId}/insertAll"/>
+                      uri-template="{+uri.var.apiUrl}projects/{+uri.var.projectId}/datasets/{+uri.var.datasetId}/tables/{+uri.var.tableId}/insertAll"/>
             </endpoint>
         </call>
         <!-- Remove custom Headers from the API Response -->

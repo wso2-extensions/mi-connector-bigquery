@@ -16,11 +16,12 @@
  ~  specific language governing permissions and limitations
  ~  under the License.
 -->
-<component name="bigquery-projects" type="synapse/template">
+<component name="bigquery-projects" type="synapse/template"  displayName="BigQuery Projects">
     <subComponents>
         <component name="listProjects">
             <file>listProjects.xml</file>
             <description>List projects.</description>
+            <displayName>List Projects</displayName>
         </component>
     </subComponents>
 </component>

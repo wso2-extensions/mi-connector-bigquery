@@ -1,0 +1,189 @@
+{
+  "connectorName": "googlebigquery",
+  "connectionName": "GOOGLEBIGQUERY",
+  "title": "Google BigQuery Connector",
+  "help": "<h1>Google BigQuery Connector</h1><b>Connects to Google BigQuery to perform operations like listing datasets, tables, and retrieving data.</b><br><br>",
+  "testConnectionEnabled": false,
+  "elements": [
+    {
+      "type": "attribute",
+      "value": {
+        "name": "connectionName",
+        "displayName": "Connection Name",
+        "inputType": "string",
+        "defaultValue": "GOOGLESBIGQUERY_CONNECTION_1",
+        "required": "true",
+        "helpTip": "The name for the Google Sheets connection",
+        "validation": "nameWithoutSpecialCharactors"
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Basic",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "clientId",
+                    "displayName": "Client ID",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "Client ID used to connect with Google Sheets"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "clientSecret",
+                    "displayName": "Client Secret",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "Client Secret to connect with Google Sheets"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "refreshToken",
+                    "displayName": "Refresh Token",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "Refresh Token used to connect with Google Sheets"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "collapse": true,
+            "value": {
+              "groupName": "API Details",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "apiUrl",
+                    "displayName": "API URL",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "https://www.googleapis.com/bigquery/v2/",
+                    "required": "false",
+                    "helpTip": "API URL used to connect with Google Sheets"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "tokenEndpoint",
+                    "displayName": "Token URL",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "https://oauth2.googleapis.com/token",
+                    "required": "false",
+                    "helpTip": "Token URL used to connect with Google Sheets"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "callback",
+                    "displayName": "Callback",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "Name of the JavaScript callback function that handles the response. Used in JavaScript JSON-P requests."
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "registryPath",
+                    "displayName": "Registry Path",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "Path to the registry where the connection details are stored."
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "prettyPrint",
+                    "displayName": "Pretty Print",
+                    "inputType": "checkbox",
+                    "defaultValue": "true",
+                    "required": "false",
+                    "helpTip": "If true, the response will be formatted in a more readable way."
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "quotaUser",
+                    "displayName": "Quota User",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "An alternative to user IP for quota purposes."
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "userIp",
+                    "displayName": "User IP",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "IP address of the end user for quota purposes."
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "fields",
+                    "displayName": "Fields",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "List of fields to be returned in the response."
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "ifNoneMatch",
+                    "displayName": "If None Match",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "Used for caching purposes. If the content has not changed, the server will return a 304 Not Modified response."
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "ifMatch",
+                    "displayName": "If Match",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "Used for caching purposes. If the content has changed, the server will return a 412 Precondition Failed response."
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

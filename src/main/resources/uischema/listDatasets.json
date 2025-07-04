@@ -1,0 +1,117 @@
+{
+  "connectorName": "googlebigquery",
+  "operationName": "listDatasets",
+  "title": "List Datasets",
+  "help": "<h1>List Datasets</h1><b>Lists all datasets in a specified BigQuery project.</b><br><br>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "GOOGLEBIGQUERY"
+              ],
+              "defaultType": "connection.GOOGLEBIGQUERY",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Project Configuration",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "projectId",
+              "displayName": "Project ID",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "The ID of the project which the datasets belong to"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Pagination",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "maxResults",
+              "displayName": "Max Results",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "The maximum number of results per page"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "pageToken",
+              "displayName": "Page Token",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "The page token value for pagination"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "isAll",
+              "displayName": "Include All",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "required": "false",
+              "helpTip": "Boolean value to determine whether to list all datasets, including hidden ones"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

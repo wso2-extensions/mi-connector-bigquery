@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "payload": {
+      "description": "The response from listing BigQuery table data",
+      "properties": {
+        "kind": {
+          "description": "The resource type. Value: bigquery#tableDataList",
+          "type": "string"
+        },
+        "etag": {
+          "description": "A hash of the page of results",
+          "type": "string"
+        },
+        "pageToken": {
+          "description": "A token to request the next page of results",
+          "type": "string"
+        },
+        "rows": {
+          "description": "Rows of table data",
+          "type": "array",
+          "items": {
+            "properties": {
+              "f": {
+                "description": "Represents a single row in the result set, consisting of one or more fields",
+                "type": "array",
+                "items": {
+                  "properties": {
+                    "v": {
+                      "description": "The value of the field",
+                      "oneOf": [
+                        {"type": "string"},
+                        {"type": "number"},
+                        {"type": "boolean"},
+                        {"type": "null"},
+                        {"type": "object"},
+                        {"type": "array"}
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "totalRows": {
+          "description": "The total number of rows in the complete table",
+          "type": "string"
+        }
+      }
+    },
+    "attributes": {
+      "description": "Metadata about the operation",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP status code of the API response",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

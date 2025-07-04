@@ -1,0 +1,136 @@
+{
+  "connectorName": "googlebigquery",
+  "operationName": "listTabledata",
+  "title": "List Table Data",
+  "help": "<h1>List Table Data</h1><b>Retrieves data from a BigQuery table.</b><br><br>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "GOOGLEBIGQUERY"
+              ],
+              "defaultType": "connection.GOOGLEBIGQUERY",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Table Configuration",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "projectId",
+              "displayName": "Project ID",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "The ID of the project which the dataset belongs to"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "datasetId",
+              "displayName": "Dataset ID",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "The ID of the dataset which the table belongs to"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "tableId",
+              "displayName": "Table ID",
+              "inputType": "stringOrExpression",
+              "required": "true",
+              "helpTip": "The ID of the table"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Data Options",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "maxResults",
+              "displayName": "Max Results",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "The maximum number of results per page"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "pageToken",
+              "displayName": "Page Token",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "The page token value for pagination"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "startIndex",
+              "displayName": "Start Index",
+              "inputType": "stringOrExpression",
+              "required": "false",
+              "helpTip": "Zero-based index of the starting row to read"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

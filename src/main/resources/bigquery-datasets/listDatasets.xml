@@ -24,6 +24,8 @@
     <parameter name="pageToken" description="The page token value."/>
     <parameter name="isAll"
                description="Boolean value to determine whether to list all datasets, including hidden ones."/>
+    <parameter name="responseVariable" description="Name of the variable to store operation output"/>
+    <parameter name="overwriteBody" description="Replace Message Body with operation output"/>
     <sequence>
         <property name="uri.var.projectId" expression="$func:projectId"/>
         <property name="uri.var.maxResults" expression="$func:maxResults"/>
@@ -58,9 +60,14 @@
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="{+uri.var.apiUrl}/bigquery/v2/projects/{+uri.var.projectId}/datasets{+uri.var.urlQuery}"/>
+                      uri-template="{+uri.var.apiUrl}projects/{+uri.var.projectId}/datasets{+uri.var.urlQuery}"/>
             </endpoint>
         </call>
+
+        <!-- Set the content type of the response -->
+        <property name="messageType" scope="axis2" value="application/json"/>
+        <property name="ContentType" scope="axis2" value="application/json"/>
+
         <!-- Remove custom Headers from the API Response -->
         <header name="Expires" action="remove" scope="transport"/>
         <header name="Cache-Control" action="remove" scope="transport"/>

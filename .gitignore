@@ -30,3 +30,4 @@ target
 # ignore target directories
 target/
 *.*~
+.vscode/settings.json
