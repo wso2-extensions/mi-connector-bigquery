@@ -16,11 +16,60 @@
     ],
     "releases": [
         {
-            "tagName": "v2.0.0",
+            "tagName": "v2.0.1",
             "products": [
                 "MI 4.4.0"
             ],
             "operations": [
+                {
+                    "name": "listTables",
+                    "description": "List Tables",
+                    "params": [
+                        {
+                            "name": "projectId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Project ID of the tables to list"
+                        },
+                        {
+                            "name": "datasetId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Dataset ID of the tables to list"
+                        },
+                        {
+                            "name": "maxResults",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Maximum number of results to return"
+                        },
+                        {
+                            "name": "pageToken",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Page token, returned by a previous call, to request the next page of results"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
                 {
                     "name": "runQuery",
                     "description": "Run Query",
@@ -113,55 +162,6 @@
                     "isHidden": false
                 },
                 {
-                    "name": "listTables",
-                    "description": "List Tables",
-                    "params": [
-                        {
-                            "name": "projectId",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Project ID of the tables to list"
-                        },
-                        {
-                            "name": "datasetId",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Dataset ID of the tables to list"
-                        },
-                        {
-                            "name": "maxResults",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Maximum number of results to return"
-                        },
-                        {
-                            "name": "pageToken",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Page token, returned by a previous call, to request the next page of results"
-                        },
-                        {
-                            "name": "responseVariable",
-                            "type": "string",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Name of the variable to which the output of the operation should be assigned"
-                        },
-                        {
-                            "name": "overwriteBody",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "false",
-                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
-                        }
-                    ],
-                    "isHidden": false
-                },
-                {
                     "name": "getDataset",
                     "description": "Get Dataset",
                     "params": [
@@ -197,29 +197,57 @@
                     "isHidden": false
                 },
                 {
-                    "name": "getTable",
-                    "description": "Get Table",
+                    "name": "insertAllTableData",
+                    "description": "Insert All Table Data",
                     "params": [
                         {
                             "name": "projectId",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "",
-                            "description": "Project ID of the requested table"
+                            "description": "The ID of the project which the dataset belongs to"
                         },
                         {
                             "name": "datasetId",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "",
-                            "description": "Dataset ID of the requested table"
+                            "description": "The ID of the dataset which the table belongs to"
                         },
                         {
                             "name": "tableId",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "",
-                            "description": "Table ID of the requested table"
+                            "description": "The ID of the table"
+                        },
+                        {
+                            "name": "jsonPay",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "A JSON object that contains a row of data"
+                        },
+                        {
+                            "name": "skipInvalidRows",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Boolean value to check whether the validation of row"
+                        },
+                        {
+                            "name": "ignoreUnknownValues",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Boolean value to check the validation of the values that match the table schema"
+                        },
+                        {
+                            "name": "templateSuffix",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Instance table template suffix"
                         },
                         {
                             "name": "responseVariable",
@@ -302,57 +330,29 @@
                     "isHidden": false
                 },
                 {
-                    "name": "insertAllTableData",
-                    "description": "Insert All Table Data",
+                    "name": "getTable",
+                    "description": "Get Table",
                     "params": [
                         {
                             "name": "projectId",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "",
-                            "description": "The ID of the project which the dataset belongs to"
+                            "description": "Project ID of the requested table"
                         },
                         {
                             "name": "datasetId",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "",
-                            "description": "The ID of the dataset which the table belongs to"
+                            "description": "Dataset ID of the requested table"
                         },
                         {
                             "name": "tableId",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "",
-                            "description": "The ID of the table"
-                        },
-                        {
-                            "name": "jsonPay",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "A JSON object that contains a row of data"
-                        },
-                        {
-                            "name": "skipInvalidRows",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "false",
-                            "description": "Boolean value to check whether the validation of row"
-                        },
-                        {
-                            "name": "ignoreUnknownValues",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "false",
-                            "description": "Boolean value to check the validation of the values that match the table schema"
-                        },
-                        {
-                            "name": "templateSuffix",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Instance table template suffix"
+                            "description": "Table ID of the requested table"
                         },
                         {
                             "name": "responseVariable",
